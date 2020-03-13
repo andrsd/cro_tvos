@@ -1,0 +1,45 @@
+<document>
+  <stackTemplate>
+    <collectionList>
+      <carousel>
+        <section>
+        {{#each allover }}
+          <lockup data-href-page="play" data-href-page-options="{{toJSON this }}">
+            <img src="{{ fullImageURL image }}" class="darkImage" style="width:768; height:432;" />
+            <title>{{ stationName }}</title>
+            <description class="current-show" style="font-size:27%; margin-top:10; text-align: center">{{ showTitle }}</description>
+          </lockup>
+        {{/each}}
+        </section>
+      </carousel>
+      <shelf>
+          <header>
+            <title>Regionální stanice</title>
+          </header>
+          <section>
+            {{#each regional }}
+            <lockup data-href-page="play" data-href-page-options="{{toJSON this }}">
+              <img class="tile" src="{{ image }}"/>
+              <title>{{ stationName }}</title>
+              <description class="current-show" style="font-size:27%; margin-top:10; text-align: center">{{ showTitle }}</description>
+            </lockup>
+            {{/each}}
+          </section>
+      </shelf>
+      <shelf>
+          <header>
+            <title>Zahraniční stanice</title>
+          </header>
+          <section>
+            {{#each foreign }}
+            <lockup data-href-page="play" data-href-page-options="{{toJSON this }}">
+              <img class="tile" src="{{ image }}"/>
+              <title>{{ stationName }}</title>
+              <description class="current-show" style="font-size:27%; margin-top:10; text-align: center">{{ showTitle }}</description>
+            </lockup>
+            {{/each}}
+          </section>
+      </shelf>
+    </collectionList>
+  </stackTemplate>
+</document>
