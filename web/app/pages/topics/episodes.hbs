@@ -1,0 +1,10 @@
+<grid>
+  <section>
+    {{#each episodes }}
+    <lockup data-href-page="" data-href-page-options="{{toJSON this }}">
+      <img src="{{ asset.url }}" width="350" height="350" />
+      <title>{{ shortTitle }}</title>
+    </lockup>
+    {{/each}}
+  </section>
+</grid>

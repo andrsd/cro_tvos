@@ -21,6 +21,12 @@ const url = {
   },
   get search () {
     return `${BASE_API_URL}/search`
+  },
+  get topics () {
+    return `${BASE_API_URL}/topics`
+  },
+  topicEpisodes (topic_id) {
+    return `${BASE_API_URL}/topics/${topic_id}/episodes`
   }
 }
 
