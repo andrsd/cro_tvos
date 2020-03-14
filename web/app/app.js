@@ -15,6 +15,8 @@ import errorTpl from 'shared/templates/error.hbs'
 import LivePage from 'pages/live'
 import PlayPage from 'pages/play'
 import TopicsPage from 'pages/topics'
+import EpisodePage from 'pages/episode'
+import PlayEpisodePage from 'pages/play-episode'
 import SearchPage from 'pages/search'
 
 ATV.start({

@@ -35,10 +35,7 @@ function buildResults(doc, searchText) {
             })
           }
           else if (r.type == 'episode') {
-            episodes.push({
-              name: r.attributes.title,
-              image: ''
-            })
+            episodes.push(r)
           }
         }
 

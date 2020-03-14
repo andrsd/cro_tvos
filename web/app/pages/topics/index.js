@@ -62,7 +62,7 @@ const TopicsPage = ATV.Page.create({
 
         var episodes = []
         for (var r of results.data) {
-          episodes.push(r.attributes)
+          episodes.push(r)
         }
 
         //overwrite stringData for new input element if search results exist by dynamically constructing shelf template fragment

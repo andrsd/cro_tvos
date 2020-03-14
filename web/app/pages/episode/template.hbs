@@ -1,0 +1,39 @@
+<document>
+  <productTemplate>
+    <background>
+    </background>
+    <banner>
+      <stack>
+        <title>{{ episode.attributes.title }}</title>
+        <row>
+          <text>{{ episode.attributes.mirroredShow.title }}</text>
+        </row>
+        <description allowsZooming="true" moreLabel="more">{{ episode.attributes.description }}</description>
+        <row>
+          <buttonLockup data-href-page="play-episode" data-href-page-options="{{toJSON episode }}">
+            <badge src="resource://button-play"/>
+            <title>Přehrát</title>
+          </buttonLockup>
+        </row>
+      </stack>
+      <heroImg src="{{ episode.attributes.asset.url }}" style="width: 700;"/>
+    </banner>
+    <shelf>
+      <header>
+        <title>Další epizody pořadu</title>
+      </header>
+      <section>
+        {{#each related }}
+        <lockup data-href-page="episode" data-href-page-options="{{toJSON this }}">
+          {{#if attributes.asset.url}}
+          <img src="{{ attributes.asset.url }}" width="226" height="150" />
+          {{else}}
+          <img src="{{ asset_url img/episode.png }}" width="226" height="150" />
+          {{/if}}
+          <title>{{ attributes.shortTitle }}{{#if attributes.part}} ({{ attributes.part }}){{/if}}</title>
+        </lockup>
+        {{/each}}
+      </section>
+    </shelf>
+  </productTemplate>
+</document>

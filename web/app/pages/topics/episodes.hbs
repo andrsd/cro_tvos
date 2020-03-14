@@ -1,9 +1,9 @@
 <grid>
   <section>
     {{#each episodes }}
-    <lockup data-href-page="" data-href-page-options="{{toJSON this }}">
-      <img src="{{ asset.url }}" width="350" height="350" />
-      <title>{{ shortTitle }}</title>
+    <lockup data-href-page="episode" data-href-page-options="{{toJSON this }}">
+      <img src="{{ attributes.asset.url }}" width="350" height="350" />
+      <title>{{ attributes.shortTitle }}</title>
     </lockup>
     {{/each}}
   </section>
