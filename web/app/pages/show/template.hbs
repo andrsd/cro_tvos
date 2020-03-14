@@ -1,0 +1,30 @@
+<document>
+  <compilationTemplate>
+    <list>
+      <relatedContent>
+        <itemBanner>
+          <heroImg src="{{ show.attributes.asset.url }}" />
+          <row>
+            <buttonLockup>
+              <badge src="resource://button-add"/>
+              <title>Přidat</title>
+            </buttonLockup>
+          </row>
+        </itemBanner>
+      </relatedContent>
+      <header>
+        <title>{{ show.attributes.title }}</title>
+        <row>
+          <text>{{ show.relationships.episodes.meta.count }} epizod</text>
+        </row>
+      </header>
+      <section>
+        {{#each episodes}}
+        <listItemLockup data-href-page="play-episode" data-href-page-options="{{toJSON this }}">
+          <title>{{ attributes.title }}</title>
+        </listItemLockup>
+        {{/each}}
+      </section>
+    </list>
+  </compilationTemplate>
+</document>

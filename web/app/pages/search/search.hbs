@@ -6,9 +6,9 @@
     </header>
     <section>
       {{#each shows }}
-      <lockup data-href-page="" data-href-page-options="{{toJSON this }}">
-        <img src="{{ fullImageURL image }}" width="350" height="350" />
-        <title>{{ name }}</title>
+      <lockup data-href-page="show" data-href-page-options="{{toJSON this }}">
+        <img src="{{ fullImageURL attributes.asset.url }}" width="350" height="350" />
+        <title>{{ attributes.title }}</title>
       </lockup>
       {{/each}}
     </section>

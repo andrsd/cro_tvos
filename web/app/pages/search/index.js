@@ -29,10 +29,7 @@ function buildResults(doc, searchText) {
 
         for (var r of results.data) {
           if (r.type == 'show') {
-            shows.push({
-              name: r.attributes.title,
-              image: r.attributes.asset.url
-            })
+            shows.push(r)
           }
           else if (r.type == 'episode') {
             episodes.push(r)

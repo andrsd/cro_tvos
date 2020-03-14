@@ -31,6 +31,9 @@ const url = {
   episode (episode_id) {
     return `${BASE_API_URL}/episodes/${episode_id}`
   },
+  show (show_id) {
+    return `${BASE_API_URL}/shows/${show_id}`
+  },
   showEpisodes (show_id) {
     return `${BASE_API_URL}/shows/${show_id}/episodes`
   }
