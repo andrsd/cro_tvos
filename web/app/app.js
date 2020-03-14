@@ -14,6 +14,7 @@ import errorTpl from 'shared/templates/error.hbs'
 // pages
 import LivePage from 'pages/live'
 import PlayPage from 'pages/play'
+import SearchPage from 'pages/search'
 
 ATV.start({
   style: css,
@@ -22,6 +23,11 @@ ATV.start({
       id: 'live',
       name: 'Živě',
       page: LivePage,
+      attributes: { autoHighlight: true, reloadOnSelect: true }
+    },{
+      id: 'search',
+      name: 'Hledat',
+      page: SearchPage,
       attributes: { reloadOnSelect: true }
     }]
   },

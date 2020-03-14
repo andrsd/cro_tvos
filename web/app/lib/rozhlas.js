@@ -18,6 +18,9 @@ const url = {
   },
   stationSchedule(name, year, month, day) {
     return `https://api.rozhlas.cz/data/v2/schedule/day/${year}/${month}/${day}/${name}/brief.json`
+  },
+  get search () {
+    return `${BASE_API_URL}/search`
   }
 }
 
