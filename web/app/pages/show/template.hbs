@@ -22,6 +22,7 @@
         {{#each episodes}}
         <listItemLockup data-href-page="play-episode" data-href-page-options="{{toJSON this }}">
           <title>{{ attributes.title }}</title>
+          <decorationLabel>{{ attributes.length }}</decorationLabel>
         </listItemLockup>
         {{/each}}
       </section>

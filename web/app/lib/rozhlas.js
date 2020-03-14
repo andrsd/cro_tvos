@@ -5,6 +5,23 @@ const _ = ATV._ // lodash
 // Doco @ https://rapidoc.croapp.cz/
 const BASE_API_URL = 'https://api.mujrozhlas.cz'
 
+function episode_time(since, till) {
+  var start = Date.parse(since)
+  var end = Date.parse(till)
+  var len = end - start
+  var minutes = Math.floor((len / (1000 * 60)) % 60)
+  var hours = Math.floor((len / (1000 * 60 * 60)) % 24)
+
+  if (hours == 0)
+    return minutes + " min"
+  else {
+    if (minutes < 10)
+      return hours + ":0" + minutes
+    else
+      return hours + ":" + minutes
+  }
+}
+
 const url = {
   // URLS Generators
   get stations () {
@@ -40,5 +57,6 @@ const url = {
 }
 
 export default {
-  url
+  url,
+  episode_time
 }

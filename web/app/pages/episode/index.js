@@ -13,16 +13,19 @@ const EpisodePage = ATV.Page.create({
     Promise
       .all([getEpisode, getRelatedEpisodes])
       .then((xhrs) => {
-        let episode = xhrs[0].response
+        let e = xhrs[0].response.data
+
+        var episode = e
+        episode.attributes.length = API.episode_time(episode.attributes.since, episode.attributes.till)
 
         var related = []
         for (var r of xhrs[1].response.data) {
-          if (r.id != episode.data.id)
+          if (r.id != episode.id)
             related.push(r)
         }
 
         resolve({
-          episode: episode.data,
+          episode: episode,
           related: related
         })
       }, (xhr) => {
