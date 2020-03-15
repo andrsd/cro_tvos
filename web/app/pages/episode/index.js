@@ -8,30 +8,49 @@ const EpisodePage = ATV.Page.create({
   template: template,
   ready (options, resolve, reject) {
     let getEpisode = ATV.Ajax.get(API.url.episode(options.id), {})
-    let getRelatedEpisodes = ATV.Ajax.get(API.url.showEpisodes(options.relationships.show.data.id) + `?page[limit]=10`, {})
+    if ('relationships' in options) {
+      let getRelatedEpisodes = ATV.Ajax.get(API.url.showEpisodes(options.relationships.show.data.id) + `?page[limit]=10`, {})
 
-    Promise
-      .all([getEpisode, getRelatedEpisodes])
-      .then((xhrs) => {
-        let e = xhrs[0].response.data
+      Promise
+        .all([getEpisode, getRelatedEpisodes])
+        .then((xhrs) => {
+          let e = xhrs[0].response.data
 
-        var episode = e
-        episode.attributes.length = API.episode_time(episode.attributes.since, episode.attributes.till)
+          var episode = e
+          episode.attributes.length = API.episode_time(episode.attributes.since, episode.attributes.till)
 
-        var related = []
-        for (var r of xhrs[1].response.data) {
-          if (r.id != episode.id)
-            related.push(r)
-        }
+          var related = []
+          for (var r of xhrs[1].response.data) {
+            if (r.id != episode.id)
+              related.push(r)
+          }
 
-        resolve({
-          episode: episode,
-          related: related
+          resolve({
+            episode: episode,
+            related: related
+          })
+        }, (xhr) => {
+          // error
+          reject()
         })
-      }, (xhr) => {
-        // error
-        reject()
-      })
+    }
+    else {
+      Promise
+        .all([getEpisode])
+        .then((xhrs) => {
+          let e = xhrs[0].response.data
+
+          var episode = e
+          episode.attributes.length = API.episode_time(episode.attributes.since, episode.attributes.till)
+
+          resolve({
+            episode: episode
+          })
+        }, (xhr) => {
+          // error
+          reject()
+        })
+    }
   }
 })
 

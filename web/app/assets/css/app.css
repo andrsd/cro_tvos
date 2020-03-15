@@ -20,6 +20,10 @@
 .showAndScrollTextOnHighlight {
     tv-text-highlight-style: marquee-and-show-on-highlight;
 }
+.square {
+    width: 250;
+    height: 250;
+}
 .tile {
     width: 400;
     height: 225;

@@ -24,6 +24,9 @@ function episode_time(since, till) {
 
 const url = {
   // URLS Generators
+  get homepage () {
+    return `${BASE_API_URL}/homepage`
+  },
   get stations () {
     return `${BASE_API_URL}/stations`
   },
@@ -41,6 +44,9 @@ const url = {
   },
   get topics () {
     return `${BASE_API_URL}/topics`
+  },
+  topic (topic_id) {
+    return `${BASE_API_URL}/topics/${topic_id}`
   },
   topicEpisodes (topic_id) {
     return `${BASE_API_URL}/topics/${topic_id}/episodes`
@@ -66,6 +72,18 @@ const url = {
   serialEpisodes (serial_id) {
     return `${BASE_API_URL}/serials/${serial_id}/episodes`
   },
+  entityUrl(e) {
+    if (e.type == 'show')
+      return `${BASE_API_URL}/shows/${e.id}`
+    else if (e.type == 'episode')
+      return `${BASE_API_URL}/episodes/${e.id}`
+    else if (e.type == 'serial')
+      return `${BASE_API_URL}/serials/${e.id}`
+    else if (e.type == 'topic')
+      return `${BASE_API_URL}/topics/${e.id}`
+    else
+      return null
+  }
 }
 
 export default {

@@ -13,6 +13,7 @@ import errorTpl from 'shared/templates/error.hbs'
 
 // pages
 import LivePage from 'pages/live'
+import HomePage from 'pages/home'
 import PlayPage from 'pages/play'
 import SerialsPage from 'pages/serials'
 import SerialPage from 'pages/serial'
@@ -30,6 +31,11 @@ ATV.start({
       id: 'live',
       name: 'Živě',
       page: LivePage,
+      attributes: { reloadOnSelect: true }
+    },{
+      id: 'home',
+      name: 'Domů',
+      page: HomePage,
       attributes: { autoHighlight: true, reloadOnSelect: true }
     },{
       id: 'shows',

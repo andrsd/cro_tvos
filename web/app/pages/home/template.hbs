@@ -1,0 +1,61 @@
+<document>
+  <stackTemplate>
+    <collectionList>
+      {{#if carousel}}
+      <carousel>
+        <section>
+          {{#each carousel.items }}
+          <lockup data-href-page="{{ entity.type }}" data-href-page-options="{{toJSON entity }}">
+            <img src="{{ fullImageURL image }}" class="darkImage" style="width:570; height:320;" />
+            <title>{{ title }}</title>
+            <description class="current-show" style="font-size:27%; margin-top:10; text-align: center">{{ description }}</description>
+          </lockup>
+          {{/each}}
+        </section>
+      </carousel>
+      {{/if}}
+      {{#if dashboard}}
+      <grid>
+          <section>
+            {{#each dashboard }}
+            <lockup data-href-page="topic" data-href-page-options="{{toJSON this }}">
+              <img src="{{ attributes.asset.url }}" style="width: 370; height: 370"/>
+              <title>{{ attributes.title }}</title>
+            </lockup>
+            {{/each}}
+          </section>
+      </grid>
+      {{/if}}
+      {{#if selected}}
+      <shelf>
+          <header>
+            <title>Vybíráme hry, četby a povídky</title>
+          </header>
+          <section>
+            {{#each selected }}
+            <lockup data-href-page="{{ type }}" data-href-page-options="{{toJSON this }}">
+              <img class="tile" src="{{ attributes.asset.url }}"/>
+              <title>{{ attributes.title }}</title>
+            </lockup>
+            {{/each}}
+          </section>
+      </shelf>
+      {{/if}}
+      {{#if recommended}}
+      <shelf>
+          <header>
+            <title>Doporučené</title>
+          </header>
+          <section>
+            {{#each recommended }}
+            <lockup data-href-page="{{ type }}" data-href-page-options="{{toJSON this }}">
+              <img class="square" src="{{ attributes.asset.url }}"/>
+              <title>{{ attributes.title }}</title>
+            </lockup>
+            {{/each}}
+          </section>
+      </shelf>
+      {{/if}}
+    </collectionList>
+  </stackTemplate>
+</document>

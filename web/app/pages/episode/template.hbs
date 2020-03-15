@@ -17,6 +17,7 @@
       </stack>
       <heroImg src="{{ episode.attributes.asset.url }}" style="width: 700;"/>
     </banner>
+    {{#if related}}
     <shelf style="padding: 10 0 -85 50">
       <header>
         <title>Další epizody pořadu</title>
@@ -34,5 +35,6 @@
         {{/each}}
       </section>
     </shelf>
+    {{/if}}
   </productTemplate>
 </document>
