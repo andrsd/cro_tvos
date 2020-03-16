@@ -23,7 +23,7 @@
       {{#each episodes }}
       <lockup data-href-page="episode" data-href-page-options="{{toJSON this }}">
         <img src="{{ fullImageURL attributes.asset.url }}" width="350" height="350" />
-        <title>{{ attributes.shortTitle }}</title>
+        <title>{{#if attributes.part}}{{attributes.part}}. {{/if}}{{ attributes.shortTitle }}</title>
       </lockup>
       {{/each}}
     </section>
