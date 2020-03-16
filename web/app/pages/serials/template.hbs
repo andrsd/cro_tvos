@@ -1,0 +1,24 @@
+<document>
+  <listTemplate>
+    <banner>
+      <title>Seriály</title>
+    </banner>
+    <list>
+      <section>
+        {{#each items}}
+        <listItemLockup data-href-page="serial" data-href-page-options="{{toJSON this }}">
+          <title>{{ attributes.title }}</title>
+          <decorationLabel>{{ attributes.totalParts }}</decorationLabel>
+          <relatedContent>
+            <lockup>
+              <img src="{{ attributes.asset.url }}" />
+              <title>{{ attributes.title }}</title>
+              <description>{{ attributes.description }}</description>
+            </lockup>
+          </relatedContent>
+        </listItemLockup>
+        {{/each}}
+      </section>
+    </list>
+  </listTemplate>
+</document>

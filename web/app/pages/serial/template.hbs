@@ -1,0 +1,37 @@
+<document>
+  <productTemplate>
+    <banner style="height:685">
+      <stack>
+        <title>{{ info.attributes.title }}</title>
+        <subtitle id='ep-title' style="color: rgb(255, 255, 255); font-size: 40%; font-weight: bold; padding-bottom: 10"></subtitle>
+        <row>
+          <text id='ep-run-time'></text>
+          <text id='ep-date'></text>
+        </row>
+        <description id='ep-description' allowsZooming="true" moreLabel="more">{{ info.attributes.description }}</description>
+        <row>
+          <buttonLockup id='play-btn'>
+            <badge src="resource://button-play"/>
+            <title>Přehrát</title>
+          </buttonLockup>
+        </row>
+      </stack>
+      <heroImg src="{{ info.attributes.asset.url }}" style="width: 700;"/>
+    </banner>
+    {{#if episodes }}
+    <shelf autoHighlight="true" style="padding: 10 0 -85 50">
+      <header>
+        <title>Epizody pořadu</title>
+      </header>
+      <section>
+        {{#each episodes }}
+        <lockup id="{{ id }}">
+          <img src="{{ asset_url img/episode.png }}" width="300" height="200" />
+          <title>{{ attributes.part }}. {{ attributes.shortTitle }}</title>
+        </lockup>
+        {{/each}}
+      </section>
+    </shelf>
+    {{/if}}
+  </productTemplate>
+</document>

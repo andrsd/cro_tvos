@@ -14,11 +14,14 @@ import errorTpl from 'shared/templates/error.hbs'
 // pages
 import LivePage from 'pages/live'
 import PlayPage from 'pages/play'
+import SerialsPage from 'pages/serials'
+import SerialPage from 'pages/serial'
 import TopicsPage from 'pages/topics'
 import ShowPage from 'pages/show'
 import EpisodePage from 'pages/episode'
 import PlayEpisodePage from 'pages/play-episode'
 import SearchPage from 'pages/search'
+import ErrorPage from 'pages/error'
 
 ATV.start({
   style: css,
@@ -28,6 +31,11 @@ ATV.start({
       name: 'Živě',
       page: LivePage,
       attributes: { autoHighlight: true, reloadOnSelect: true }
+    },{
+      id: 'serials',
+      name: 'Seriály',
+      page: SerialsPage,
+      attributes: { reloadOnSelect: true }
     },{
       id: 'topics',
       name: 'Témata',

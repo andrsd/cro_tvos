@@ -53,7 +53,16 @@ const url = {
   },
   showEpisodes (show_id) {
     return `${BASE_API_URL}/shows/${show_id}/episodes`
-  }
+  },
+  get serials () {
+    return `${BASE_API_URL}/serials`
+  },
+  serial (serial_id) {
+    return `${BASE_API_URL}/serials/${serial_id}`
+  },
+  serialEpisodes (serial_id) {
+    return `${BASE_API_URL}/serials/${serial_id}/episodes`
+  },
 }
 
 export default {
