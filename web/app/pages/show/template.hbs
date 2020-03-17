@@ -16,6 +16,12 @@
         <title>{{ show.attributes.title }}</title>
         <row>
           <text>{{ show.relationships.episodes.meta.count }} epizod</text>
+          {{#if show.attributes.active}}
+          <text>Aktivní</text>
+          {{/if}}
+          {{#if show.attributes.podcast}}
+          <text>Podcast</text>
+          {{/if}}
         </row>
       </header>
       <section>
