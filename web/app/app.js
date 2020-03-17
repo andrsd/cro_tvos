@@ -17,6 +17,7 @@ import PlayPage from 'pages/play'
 import SerialsPage from 'pages/serials'
 import SerialPage from 'pages/serial'
 import TopicsPage from 'pages/topics'
+import ShowsPage from 'pages/shows'
 import ShowPage from 'pages/show'
 import EpisodePage from 'pages/episode'
 import PlayEpisodePage from 'pages/play-episode'
@@ -31,6 +32,11 @@ ATV.start({
       name: 'Živě',
       page: LivePage,
       attributes: { autoHighlight: true, reloadOnSelect: true }
+    },{
+      id: 'shows',
+      name: 'Pořady',
+      page: ShowsPage,
+      attributes: { reloadOnSelect: true }
     },{
       id: 'serials',
       name: 'Seriály',

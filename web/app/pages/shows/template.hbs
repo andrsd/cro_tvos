@@ -1,0 +1,23 @@
+<document>
+  <listTemplate>
+    <banner>
+      <title>Pořady</title>
+    </banner>
+    <list>
+      <section>
+        {{#each items}}
+        <listItemLockup data-href-page="show" data-href-page-options="{{toJSON this }}">
+          <title>{{ attributes.title }}</title>
+          <relatedContent>
+            <lockup>
+              <img src="{{ attributes.asset.url }}" />
+              <title>{{ attributes.title }}</title>
+              <description>{{ attributes.description }}</description>
+            </lockup>
+          </relatedContent>
+        </listItemLockup>
+        {{/each}}
+      </section>
+    </list>
+  </listTemplate>
+</document>
