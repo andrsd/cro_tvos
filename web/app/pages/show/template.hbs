@@ -31,6 +31,11 @@
           <decorationLabel>{{ attributes.length }}</decorationLabel>
         </listItemLockup>
         {{/each}}
+        {{#if links.next}}
+        <listItemLockup data-href-page="show" data-href-page-options="{{toJSON @root.links }}">
+          <title>Další...</title>
+        </listItemLockup>
+        {{/if}}
       </section>
     </list>
   </compilationTemplate>

@@ -17,6 +17,11 @@
           </relatedContent>
         </listItemLockup>
         {{/each}}
+        {{#if links.next}}
+        <listItemLockup data-href-page="shows" data-href-page-options="{{toJSON @root.links }}">
+          <title>Další...</title>
+        </listItemLockup>
+        {{/if}}
       </section>
     </list>
   </listTemplate>
