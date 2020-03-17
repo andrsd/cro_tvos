@@ -34,6 +34,7 @@ const LivePage = ATV.Page.create({
           if (since <= now && now < till) {
             var station_id = s.relationships.station.data.id
             all[station_id].showTitle = s.attributes.mirroredShow.title
+            all[station_id].progress = (now - since) / (till - since)
             if (s.attributes.asset.url == undefined)
               all[station_id].image = all[station_id].stationImage
             else
