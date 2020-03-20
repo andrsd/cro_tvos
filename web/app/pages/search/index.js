@@ -18,6 +18,7 @@ function buildResults(doc, searchText) {
   if (searchText) {
     var shows = []
     var episodes = []
+    var serials = []
 
     let getSearch = ATV.Ajax.get(API.url.search + '?filter[fulltext]=' + encodeURIComponent(searchText) + '&onlyPlayable=true')
 
@@ -26,6 +27,7 @@ function buildResults(doc, searchText) {
       .all([getSearch])
       .then((xhrs) => {
         let results = xhrs[0].response
+        var serial_ids = {}
 
         for (var r of results.data) {
           if (r.type == 'show') {
@@ -33,18 +35,42 @@ function buildResults(doc, searchText) {
           }
           else if (r.type == 'episode') {
             episodes.push(r)
+            if (r.relationships && 'serial' in r.relationships && 'data' in r.relationships.serial) {
+              serial_ids[r.relationships.serial.data.id] = true
+            }
           }
         }
 
-        //overwrite stringData for new input element if search results exist by dynamically constructing shelf template fragment
-        lsInput.stringData = searchTpl({
-          shows: shows,
-          episodes: episodes
-        });
+        var promises = []
 
-        //add the new input element to the document by providing the newly created input, the context,
-        //and the operator integer flag (1 to append as child, 2 to overwrite existing children)
-        lsParser.parseWithContext(lsInput, doc.getElementsByTagName("collectionList").item(0), 2);
+        for (var id in serial_ids) {
+          promises.push(
+            ATV.Ajax.get(API.url.serial(id))
+              .then((xhr) => {
+                serials.push(xhr.response.data)
+              })
+          )
+        }
+
+        Promise
+          .all(promises)
+          .then(() => {
+
+            //overwrite stringData for new input element if search results exist by dynamically constructing shelf template fragment
+            lsInput.stringData = searchTpl({
+              shows: shows,
+              episodes: episodes,
+              serials: serials
+            });
+
+            //add the new input element to the document by providing the newly created input, the context,
+            //and the operator integer flag (1 to append as child, 2 to overwrite existing children)
+            lsParser.parseWithContext(lsInput, doc.getElementsByTagName("collectionList").item(0), 2);
+            resolve()
+          }, () => {
+            // error
+            reject()
+          })
       }, (xhr) => {
         // error
         reject()

@@ -29,4 +29,19 @@
     </section>
   </shelf>
   {{/if}}
+  {{#if serials}}
+  <shelf>
+    <header>
+      <title>Seriály</title>
+    </header>
+    <section>
+      {{#each serials }}
+      <lockup data-href-page="serial" data-href-page-options="{{toJSON this }}">
+        <img src="{{ fullImageURL attributes.asset.url }}" width="350" height="350" />
+        <title>{{ attributes.title }}{{#if attributes.totalParts}} ({{attributes.totalParts}}){{/if}}</title>
+      </lockup>
+      {{/each}}
+    </section>
+  </shelf>
+  {{/if}}
 </collectionList>
