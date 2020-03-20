@@ -19,7 +19,7 @@ function buildResults(doc, searchText) {
     var shows = []
     var episodes = []
 
-    let getSearch = ATV.Ajax.get(API.url.search + '?filter[fulltext]=' + searchText + '&onlyPlayable=true')
+    let getSearch = ATV.Ajax.get(API.url.search + '?filter[fulltext]=' + encodeURIComponent(searchText) + '&onlyPlayable=true')
 
     // Then resolve them at once
     Promise
