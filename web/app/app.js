@@ -22,7 +22,6 @@ import ShowPage from 'pages/show'
 import EpisodePage from 'pages/episode'
 import PlayEpisodePage from 'pages/play-episode'
 import SearchPage from 'pages/search'
-import ErrorPage from 'pages/error'
 
 ATV.start({
   style: css,

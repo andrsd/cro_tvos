@@ -25,22 +25,27 @@ const PlayEpisodePage = ATV.Page.create({
         tvosPlaylist.push(mediaItem)
         player.playlist = tvosPlaylist
         player.play()
+        resolve(false)
       }
       else {
-        ATV.Navigation.navigate('error', {
-          title: 'Chyba',
-          message: 'Nelze přehrát. Nepodařilo se najít URL audio souboru.'
+        ATV.Navigation.showError({
+          data: {
+            title: 'Chyba',
+            message: 'Nelze přehrát. Nepodařilo se najít URL audio souboru.'
+          },
+          type: 'document'
         })
       }
     }
     else {
-      ATV.Navigation.navigate('error', {
-        title: 'Chyba',
-        message: 'Nelze přehrát. Epizoda již není dostupná.'
+      ATV.Navigation.showError({
+        data: {
+          title: 'Chyba',
+          message: 'Nelze přehrát. Epizoda již není dostupná.'
+        },
+        type: 'document'
       })
     }
-
-    resolve(false)
   }
 })
 
