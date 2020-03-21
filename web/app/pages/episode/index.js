@@ -9,7 +9,7 @@ const EpisodePage = ATV.Page.create({
   ready (options, resolve, reject) {
     let getEpisode = ATV.Ajax.get(API.url.episode(options.id), {})
     if ('relationships' in options) {
-      let getRelatedEpisodes = ATV.Ajax.get(API.url.showEpisodes(options.relationships.show.data.id) + `?page[limit]=10`, {})
+      let getRelatedEpisodes = ATV.Ajax.get(API.url.showEpisodes(options.relationships.show.data.id) + `?page[limit]=10&sort=-since`, {})
 
       Promise
         .all([getEpisode, getRelatedEpisodes])
@@ -35,19 +35,31 @@ const EpisodePage = ATV.Page.create({
         })
     }
     else {
+      var episode
+
       Promise
         .all([getEpisode])
         .then((xhrs) => {
-          let e = xhrs[0].response.data
-
-          var episode = e
+          episode = xhrs[0].response.data
           episode.attributes.length = API.episode_time(episode.attributes.since, episode.attributes.till)
 
-          resolve({
-            episode: episode
-          })
+          return new ATV.Ajax.get(API.url.showEpisodes(episode.relationships.show.data.id) + `?page[limit]=10&sort=-since`, {})
         }, (xhr) => {
           // error
+          reject()
+        })
+        .then((res) => {
+          var related = []
+          for (var r of res.response.data) {
+            if (r.id != episode.id)
+              related.push(r)
+          }
+
+          resolve({
+            episode: episode,
+            related: related
+          })
+        }, () => {
           reject()
         })
     }
