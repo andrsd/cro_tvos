@@ -1,0 +1,24 @@
+<document>
+  <stackTemplate>
+    <banner>
+      <title>Téma: {{ attributes.title }}</title>
+    </banner>
+    <collectionList>
+      {{#each sections }}
+      <grid style="padding-bottom: 100">
+        <header>
+          <title>{{ title }}</title>
+        </header>
+        <section>
+          {{#each items }}
+          <lockup data-href-page="{{ entity.type }}" data-href-page-options="{{toJSON entity }}">
+            <img src="{{ fullImageURL image }}" class="tile_wide"/>
+            <title>{{ title }}</title>
+          </lockup>
+          {{/each}}
+        </section>
+      </grid>
+      {{/each}}
+    </collectionList>
+  </stackTemplate>
+</document>

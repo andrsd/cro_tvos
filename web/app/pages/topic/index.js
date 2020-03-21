@@ -1,5 +1,6 @@
 import ATV from 'atvjs'
 import template from './template.hbs'
+import storiesTpl from './stories.hbs'
 
 import API from 'lib/rozhlas.js'
 
@@ -7,6 +8,17 @@ const TopicPage = ATV.Page.create({
   name: 'topic',
   template: template,
   ready (options, resolve, reject) {
+    if (options.id == '671d0806-2afe-4282-ae90-319b6ef369a2') {
+      // hry, cetby a povidky
+      this.template = storiesTpl
+      this.playsReadingsStories(options, resolve, reject)
+    }
+    else {
+      this.template = template
+      this.commonTopic(options, resolve, reject)
+    }
+  },
+  commonTopic (options, resolve, reject) {
     let getTopic = ATV.Ajax.get(API.url.topic(options.id), {})
 
     Promise
@@ -41,6 +53,30 @@ const TopicPage = ATV.Page.create({
                 obj.episodes.push(e)
               }
             }
+          }
+        }
+
+        resolve(obj)
+      }, (xhr) => {
+        // error
+        reject()
+      })
+  },
+  playsReadingsStories(options, resolve, reject) {
+    let getTopic = ATV.Ajax.get(API.url.topic(options.id), {})
+
+    Promise
+      .all([getTopic])
+      .then((xhrs) => {
+        var data = xhrs[0].response.data
+        var obj = {}
+
+        obj.attributes = data.attributes
+        obj.sections = []
+
+        for (var widget of data.attributes.widgets) {
+          if (widget.type == 'carousel') {
+            obj.sections.push(widget.attributes)
           }
         }
 

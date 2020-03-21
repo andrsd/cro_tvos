@@ -36,6 +36,10 @@
     width: 334;
     height: 501;
 }
+.tile_wide {
+    width: 300;
+    height: 168;
+}
 
 .darkBackgroundColor {
     background-color: rgba(7, 20, 35, 0.8);
