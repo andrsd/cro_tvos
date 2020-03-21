@@ -2,7 +2,7 @@
   <productTemplate>
     <banner style="height:685">
       <stack>
-        <title>{{ episode.attributes.title }}</title>
+        <title>{{ episode.attributes.title }}{{#if episode.attributes.part}} ({{ episode.attributes.part}}. díl){{/if}}</title>
         <row>
           <text>{{ episode.attributes.mirroredShow.title }}</text>
           <text>{{ episode.attributes.length }}</text>
