@@ -12,7 +12,7 @@
             <lockup>
               <img src="{{ attributes.asset.url }}" />
               <title>{{ attributes.title }}</title>
-              <description>{{ attributes.description }}</description>
+              <description>{{removeHTML attributes.description }}</description>
             </lockup>
           </relatedContent>
         </listItemLockup>

@@ -1,5 +1,6 @@
 import ATV from 'atvjs'
 import Handlebars from 'handlebars'
+import stripHtml from 'string-strip-html'
 
 const _ = ATV._
 
@@ -22,6 +23,9 @@ const helpers = {
   },
   fullImageURL (imageURL) {
     return new Handlebars.SafeString(imageURL)
+  },
+  removeHTML (str) {
+    return stripHtml(str)
   }
 }
 

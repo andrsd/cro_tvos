@@ -1,4 +1,5 @@
 import ATV from 'atvjs'
+import stripHtml from 'string-strip-html'
 
 const PlayEpisodePage = ATV.Page.create({
   name: 'play-episode',
@@ -18,7 +19,7 @@ const PlayEpisodePage = ATV.Page.create({
         const tvosPlaylist = new Playlist()
         const mediaItem = new MediaItem('audio', url)
         mediaItem.title = options.attributes.title
-        mediaItem.description = options.attributes.description
+        mediaItem.description = stripHTML(options.attributes.description)
         if (typeof options.attributes.asset != 'undefined' &&
             typeof options.attributes.asset.url != 'undefined')
           mediaItem.artworkImageURL = options.attributes.asset.url

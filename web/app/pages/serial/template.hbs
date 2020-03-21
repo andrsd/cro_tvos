@@ -8,7 +8,7 @@
           <text id='ep-run-time'></text>
           <text id='ep-date'></text>
         </row>
-        <description id='ep-description' allowsZooming="true" moreLabel="more">{{ info.attributes.description }}</description>
+        <description id='ep-description' allowsZooming="true" moreLabel="more">{{removeHTML info.attributes.description }}</description>
         <row>
           <buttonLockup id='play-btn'>
             <badge src="resource://button-play"/>

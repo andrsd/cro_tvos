@@ -12,7 +12,7 @@
           <relatedContent>
             <lockup>
               <img src="{{ fullImageURL image }}"/>
-              <description>{{ description }}</description>
+              <description>{{removeHTML description }}</description>
               <decorationLabel>*</decorationLabel>
             </lockup>
           </relatedContent>
@@ -29,7 +29,7 @@
           <relatedContent>
             <lockup>
               <img src="{{ attributes.asset.url }}"/>
-              <description>{{ attributes.description }}</description>
+              <description>{{removeHTML attributes.description }}</description>
             </lockup>
           </relatedContent>
         </listItemLockup>
@@ -49,7 +49,7 @@
               {{else}}
                 <img src="{{ @root.attributes.asset.url }}" />
               {{/if}}
-              <description>{{ attributes.description }}</description>
+              <description>{{removeHTML attributes.description }}</description>
             </lockup>
           </relatedContent>
         </listItemLockup>

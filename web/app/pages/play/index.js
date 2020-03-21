@@ -48,7 +48,7 @@ const PlayPage = ATV.Page.create({
         const mediaItem = new MediaItem('audio', playlist)
         if (current_entry != null) {
           mediaItem.title = current_entry.title
-          mediaItem.description = current_entry.description
+          mediaItem.description = stripHTML(options.attributes.description)
           mediaItem.artworkImageURL = current_entry.edition.asset
         }
         else {

@@ -1,6 +1,7 @@
 import ATV from 'atvjs'
 import template from './template.hbs'
 import errorTpl from 'shared/templates/error.hbs'
+import stripHtml from 'string-strip-html'
 
 import API from 'lib/rozhlas.js'
 
@@ -40,7 +41,7 @@ const SerialPage = ATV.Page.create({
 
       var doc = getActiveDocument()
       doc.getElementById('ep-title').textContent = attrs.part + ". " + attrs.title
-      doc.getElementById('ep-description').textContent = attrs.description
+      doc.getElementById('ep-description').textContent = stripHtml(attrs.description)
       doc.getElementById('ep-run-time').textContent = API.episode_time(attrs.since, attrs.till)
       doc.getElementById('ep-date').textContent = new Date(attrs.since).toLocaleString('cs-CZ', { dateStyle: 'long' } )
 
