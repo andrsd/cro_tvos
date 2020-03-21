@@ -1,17 +1,19 @@
 <document>
-  <catalogTemplate>
-    <list>
-      <section>
-        {{#each topics }}
-        <listItemLockup id="{{ id }}">
-          <title>{{ title }}</title>
-          <relatedContent>
-            <grid>
-            </grid>
-          </relatedContent>
-        </listItemLockup>
-        {{/each}}
-      </section>
-    </list>
-  </catalogTemplate>
+  <stackTemplate>
+    <banner>
+      <title>Témata</title>
+    </banner>
+    <collectionList>
+      <grid>
+        <section>
+          {{#each topics }}
+          <lockup data-href-page="topic" data-href-page-options="{{toJSON this }}">
+            <img src="{{ attributes.asset.url }}" width="300" height="300" />
+            <title>{{ attributes.title }}</title>
+          </lockup>
+          {{/each}}
+        </section>
+      </grid>
+    </collectionList>
+  </stackTemplate>
 </document>
