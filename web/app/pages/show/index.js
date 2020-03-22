@@ -2,6 +2,7 @@ import ATV from 'atvjs'
 import template from './template.hbs'
 
 import API from 'lib/rozhlas.js'
+import favorites from 'lib/favorites.js'
 
 const ShowPage = ATV.Page.create({
   name: 'show',
@@ -23,7 +24,9 @@ const ShowPage = ATV.Page.create({
     Promise
       .all([getShow, getShowEpisodes])
       .then((xhrs) => {
+        this.show = xhrs[0].response.data
         resolve({
+          ratedButton: favorites.getRatedButton(favorites.isFavorite(this.show.id)),
           show: xhrs[0].response.data,
           episodes: xhrs[1].response.data,
           links: xhrs[1].response.links
@@ -32,7 +35,20 @@ const ShowPage = ATV.Page.create({
         // error
         reject()
       })
-  }
+  },
+  afterReady (doc) {
+    const changeFavorites = () => {
+      if (this.show) {
+        var is_favorite = favorites.change(this.show.attributes.title, 'show', this.show.id)
+        doc.getElementById('fav-btn').innerHTML = favorites.getRatedButton(is_favorite)
+      }
+    }
+
+    doc
+      .getElementById('fav-btn')
+      .addEventListener('select', changeFavorites)
+  },
+  show: null
 })
 
 export default ShowPage

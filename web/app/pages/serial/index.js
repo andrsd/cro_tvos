@@ -4,6 +4,7 @@ import errorTpl from 'shared/templates/error.hbs'
 
 import API from 'lib/rozhlas.js'
 import HB from 'lib/template-helpers.js'
+import favorites from 'lib/favorites.js'
 
 const SerialPage = ATV.Page.create({
   name: 'serial',
@@ -19,12 +20,15 @@ const SerialPage = ATV.Page.create({
     Promise
       .all([getSerialInfo, getSerialEpisodes])
       .then((xhrs) => {
+        this.serial = xhrs[0].response.data
+
         for (var s of xhrs[1].response.data) {
           this.episodes[s.id] = s
         }
 
         resolve({
-          info: xhrs[0].response.data,
+          ratedButton: favorites.getRatedButton(favorites.isFavorite(this.serial.id)),
+          info: this.serial,
           episodes: xhrs[1].response.data
         })
       }, (xhrs) => {
@@ -58,8 +62,21 @@ const SerialPage = ATV.Page.create({
       ATV.Navigation.navigate('play-episode', this.episodes[this.active_episode_id])
     }
   },
+  afterReady (doc) {
+    const changeFavorites = () => {
+      if (this.serial) {
+        var is_favorite = favorites.change(this.serial.attributes.title, "serial", this.serial.id)
+        doc.getElementById('fav-btn').innerHTML = favorites.getRatedButton(is_favorite)
+      }
+    }
+
+    doc
+      .getElementById('fav-btn')
+      .addEventListener('select', changeFavorites)
+  },
   episodes: {},
-  active_episode_id: null
+  active_episode_id: null,
+  serial: null
 })
 
 export default SerialPage

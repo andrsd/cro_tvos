@@ -1,0 +1,25 @@
+<document>
+  {{#if favorites}}
+  <stackTemplate>
+    <banner>
+      <title>Oblíbené</title>
+    </banner>
+    <collectionList>
+      <grid>
+        <section>
+          {{#each favorites}}
+          <lockup data-href-page="{{ type }}" data-href-page-options="{{toJSON this }}">
+            <img src="{{ attributes.asset.url }}" width="300" height="300"/>
+            <title>{{ attributes.title }}</title>
+          </lockup>
+          {{/each}}
+        </section>
+      </grid>
+    </collectionList>
+  </stackTemplate>
+  {{else}}
+  <alertTemplate>
+    <description>Žádné oblíbené.</description>
+  </alertTemplate>
+  {{/if}}
+</document>

@@ -24,6 +24,7 @@ import ShowPage from 'pages/show'
 import EpisodePage from 'pages/episode'
 import PlayEpisodePage from 'pages/play-episode'
 import SearchPage from 'pages/search'
+import FavoritesPage from 'pages/favorites'
 
 ATV.start({
   style: css,
@@ -38,6 +39,11 @@ ATV.start({
       name: 'Domů',
       page: HomePage,
       attributes: { autoHighlight: true, reloadOnSelect: true }
+    },{
+      id: 'favorites',
+      name: 'Oblíbené',
+      page: FavoritesPage,
+      attributes: { reloadOnSelect: true }
     },{
       id: 'shows',
       name: 'Pořady',
