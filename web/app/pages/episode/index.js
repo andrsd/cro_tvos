@@ -14,10 +14,7 @@ const EpisodePage = ATV.Page.create({
       Promise
         .all([getEpisode, getRelatedEpisodes])
         .then((xhrs) => {
-          let e = xhrs[0].response.data
-
-          var episode = e
-          episode.attributes.length = API.episode_time(episode.attributes.since, episode.attributes.till)
+          let episode = xhrs[0].response.data
 
           var related = []
           for (var r of xhrs[1].response.data) {
@@ -41,7 +38,6 @@ const EpisodePage = ATV.Page.create({
         .all([getEpisode])
         .then((xhrs) => {
           episode = xhrs[0].response.data
-          episode.attributes.length = API.episode_time(episode.attributes.since, episode.attributes.till)
 
           return new ATV.Ajax.get(API.url.showEpisodes(episode.relationships.show.data.id) + `?page[limit]=10&sort=-since`, {})
         }, (xhr) => {

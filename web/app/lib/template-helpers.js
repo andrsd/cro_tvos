@@ -26,10 +26,32 @@ const helpers = {
   },
   removeHTML (str) {
     return stripHtml(str)
-  }
+  },
+  longDate (date) {
+    var d = new Date(date)
+    return d.toLocaleDateString()
+  },
+  timeLength (since, till) {
+    var start = new Date(since)
+    var end = new Date(till)
+    var len = end - start
+    var minutes = Math.floor((len / (1000 * 60)) % 60)
+    var hours = Math.floor((len / (1000 * 60 * 60)) % 24)
+
+    if (hours == 0)
+      return minutes + " min"
+    else {
+      if (minutes > 0)
+        return hours + " h " + minutes  + " min"
+      else
+        return hours + " h"
+    }
+  },
 }
 
 // register all helpers
 _.each(helpers, (fn, name) => Handlebars.registerHelper(name, fn))
 
-export default helpers
+export default {
+  helpers
+}

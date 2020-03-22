@@ -5,7 +5,7 @@
         <title>{{ episode.attributes.title }}{{#if episode.attributes.part}} ({{ episode.attributes.part}}. díl){{/if}}</title>
         <row>
           <text>{{ episode.attributes.mirroredShow.title }}</text>
-          <text>{{ episode.attributes.length }}</text>
+          <text>{{timeLength episode.attributes.since episode.attributes.till }}</text>
         </row>
         <description allowsZooming="true" moreLabel="more">{{removeHTML episode.attributes.description }}</description>
         <row>

@@ -47,11 +47,8 @@ const TopicPage = ATV.Page.create({
           else if (widget.type == 'episodes_list') {
             obj.episodes = []
             for (var ep of widget.attributes.entities) {
-              if (ep.type == 'episode') {
-                var e = ep
-                e.attributes.length = API.episode_time(ep.attributes.since, ep.attributes.till)
-                obj.episodes.push(e)
-              }
+              if (ep.type == 'episode')
+                obj.episodes.push(ep)
             }
           }
         }

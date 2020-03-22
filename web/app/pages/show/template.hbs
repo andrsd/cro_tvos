@@ -31,7 +31,7 @@
           <ordinal minLength="2">{{attributes.part}}</ordinal>
           {{/if}}
           <title>{{ attributes.title }}</title>
-          <decorationLabel>{{ attributes.length }}</decorationLabel>
+          <subtitle>{{longDate attributes.since }}  {{timeLength attributes.since attributes.till }}</subtitle>
         </listItemLockup>
         {{/each}}
         {{#if links.next}}

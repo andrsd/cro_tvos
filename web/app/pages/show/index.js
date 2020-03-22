@@ -23,17 +23,9 @@ const ShowPage = ATV.Page.create({
     Promise
       .all([getShow, getShowEpisodes])
       .then((xhrs) => {
-        var episodes = []
-
-        for (var ep of xhrs[1].response.data) {
-          var e = ep
-          e.attributes.length = API.episode_time(ep.attributes.since, ep.attributes.till)
-          episodes.push(e)
-        }
-
         resolve({
           show: xhrs[0].response.data,
-          episodes: episodes,
+          episodes: xhrs[1].response.data,
           links: xhrs[1].response.links
         })
       }, (xhr) => {

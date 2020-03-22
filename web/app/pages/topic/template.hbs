@@ -41,7 +41,7 @@
         {{#each episodes }}
         <listItemLockup data-href-page="episode" data-href-page-options="{{toJSON this }}">
           <title>{{ attributes.title }}{{#if attributes.part}} ({{attributes.part}}. díl){{/if}}</title>
-          <decorationLabel>{{ attributes.length }}</decorationLabel>
+          <decorationLabel>{{timeLength attributes.since attributes.till }}</decorationLabel>
           <relatedContent>
             <lockup>
               {{#if attributes.asset.url}}
