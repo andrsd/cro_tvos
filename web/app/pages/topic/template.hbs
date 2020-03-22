@@ -13,7 +13,6 @@
             <lockup>
               <img src="{{ fullImageURL image }}"/>
               <description>{{removeHTML description }}</description>
-              <decorationLabel>*</decorationLabel>
             </lockup>
           </relatedContent>
         </listItemLockup>
@@ -25,7 +24,7 @@
         {{#each shows }}
         <listItemLockup data-href-page="show" data-href-page-options="{{toJSON this }}">
           <title>{{ attributes.title }}</title>
-          <decorationLabel>Pořad</decorationLabel>
+          <subtitle>Pořad</subtitle>
           <relatedContent>
             <lockup>
               <img src="{{ attributes.asset.url }}"/>
@@ -40,8 +39,8 @@
       <section style="padding-top: 40">
         {{#each episodes }}
         <listItemLockup data-href-page="episode" data-href-page-options="{{toJSON this }}">
-          <title>{{ attributes.title }}{{#if attributes.part}} ({{attributes.part}}. díl){{/if}}</title>
-          <decorationLabel>{{timeLength attributes.since attributes.till }}</decorationLabel>
+          <title>{{ attributes.title }}</title>
+          <subtitle>{{longDate attributes.since }}  {{timeLength attributes.since attributes.till }} {{#if attributes.part}} ({{attributes.part}}. díl){{/if}}</subtitle>
           <relatedContent>
             <lockup>
               {{#if attributes.asset.url}}
