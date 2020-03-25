@@ -1,39 +1,42 @@
 <document>
-  <productTemplate>
-    <banner style="height:685">
-      <stack>
-        <title>{{ info.attributes.title }}</title>
-        <subtitle id='ep-title' style="color: rgb(255, 255, 255); font-size: 40%; font-weight: bold; padding-bottom: 10"></subtitle>
-        <row>
-          <text id='ep-part'></text>
-          <text id='ep-date'></text>
-          <text id='ep-run-time'></text>
-        </row>
-        <description id='ep-description' allowsZooming="true" moreLabel="more">{{removeHTML info.attributes.description }}</description>
-        <row>
-          <buttonLockup id='play-btn'>
-            <badge src="resource://button-play"/>
-            <title>Přehrát</title>
-          </buttonLockup>
-          <buttonLockup id="fav-btn">{{{ ratedButton }}}</buttonLockup>
-        </row>
-      </stack>
-      <heroImg src="{{ info.attributes.asset.url }}" style="width: 700;"/>
-    </banner>
-    {{#if episodes }}
-    <shelf autoHighlight="true" style="padding: 10 0 -85 50">
+  <compilationTemplate>
+    <list>
+      <relatedContent>
+        <itemBanner>
+          <heroImg src="{{ serial.attributes.asset.url }}" />
+          <description id="serial-description" style="tv-text-max-lines: 3">{{removeHTML serial.attributes.description }}</description>
+          <row>
+            <buttonLockup>
+              <badge src="resource://button-add"/>
+              <title>Přidat</title>
+            </buttonLockup>
+            <buttonLockup id="fav-btn">{{{ ratedButton }}}</buttonLockup>
+          </row>
+        </itemBanner>
+      </relatedContent>
       <header>
-        <title>Epizody pořadu</title>
+        <title>{{ serial.attributes.title }}</title>
+        <row>
+          <text>{{ serial.attributes.totalParts }} epizod</text>
+        </row>
       </header>
       <section>
-        {{#each episodes }}
-        <lockup id="{{ id }}">
-          <img src="{{ asset_url img/episode.png }}" width="300" height="200" />
-          <title>{{ attributes.part }}. {{ attributes.shortTitle }}</title>
-        </lockup>
+        {{#each episodes}}
+        <listItemLockup data-href-page="play-episode" data-href-page-options="{{toJSON this }}">
+          {{#if attributes.part}}
+          <ordinal minLength="2">{{attributes.part}}</ordinal>
+          {{/if}}
+          <title>{{ attributes.title }}</title>
+          <subtitle>{{longDate attributes.since }}  {{timeLength attributes.since attributes.till }}</subtitle>
+          <placeholder>{{removeHTML attributes.description }}</placeholder>
+        </listItemLockup>
         {{/each}}
+        {{#if links.next}}
+        <listItemLockup data-href-page="show" data-href-page-options="{{toJSON @root.links }}">
+          <title>Další...</title>
+        </listItemLockup>
+        {{/if}}
       </section>
-    </shelf>
-    {{/if}}
-  </productTemplate>
+    </list>
+  </compilationTemplate>
 </document>

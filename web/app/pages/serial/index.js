@@ -10,7 +10,6 @@ const SerialPage = ATV.Page.create({
   name: 'serial',
   template: template,
   events: {
-    select: 'onSelect',
     highlight: 'onHighlight'
   },
   ready (options, resolve, reject) {
@@ -22,13 +21,9 @@ const SerialPage = ATV.Page.create({
       .then((xhrs) => {
         this.serial = xhrs[0].response.data
 
-        for (var s of xhrs[1].response.data) {
-          this.episodes[s.id] = s
-        }
-
         resolve({
           ratedButton: favorites.getRatedButton(favorites.isFavorite(this.serial.id)),
-          info: this.serial,
+          serial: this.serial,
           episodes: xhrs[1].response.data
         })
       }, (xhrs) => {
@@ -37,29 +32,13 @@ const SerialPage = ATV.Page.create({
   },
   onHighlight(e) {
     let element = e.target
-    let elementType = element.nodeName.toLowerCase()
+    let elementType = element.nodeName
 
-    if (elementType === 'lockup') {
-      var episode_id = element.getAttribute("id")
-      var attrs = this.episodes[episode_id].attributes
+    if (elementType === 'listItemLockup') {
+      var ph = element.getElementsByTagName("placeholder").item(0)
 
       var doc = getActiveDocument()
-      doc.getElementById('ep-title').textContent = attrs.title
-      doc.getElementById('ep-part').textContent = attrs.part + ". díl"
-      doc.getElementById('ep-description').textContent = HB.helpers.removeHTML(attrs.description)
-      doc.getElementById('ep-run-time').textContent = HB.helpers.timeLength(attrs.since, attrs.till)
-      doc.getElementById('ep-date').textContent = HB.helpers.longDate(attrs.since)
-
-      this.active_episode_id = episode_id
-    }
-  },
-  onSelect(e) {
-    let element = e.target
-    let elementType = element.nodeName.toLowerCase()
-    var id = element.getAttribute("id")
-
-    if (id == 'play-btn' || elementType === 'lockup') {
-      ATV.Navigation.navigate('play-episode', this.episodes[this.active_episode_id])
+      doc.getElementById('serial-description').innerHTML = ph.innerHTML
     }
   },
   afterReady (doc) {
@@ -74,8 +53,6 @@ const SerialPage = ATV.Page.create({
       .getElementById('fav-btn')
       .addEventListener('select', changeFavorites)
   },
-  episodes: {},
-  active_episode_id: null,
   serial: null
 })
 
