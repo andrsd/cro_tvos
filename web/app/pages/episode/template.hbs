@@ -4,8 +4,9 @@
       <stack>
         <title>{{ episode.attributes.title }}{{#if episode.attributes.part}} ({{ episode.attributes.part}}. díl){{/if}}</title>
         <row>
-          <text>{{ episode.attributes.mirroredShow.title }}</text>
+          <text>{{longDate episode.attributes.since }}</text>
           <text>{{timeLength episode.attributes.since episode.attributes.till }}</text>
+          <text>{{ episode.attributes.mirroredShow.title }}</text>
         </row>
         <description allowsZooming="true" moreLabel="more">{{removeHTML episode.attributes.description }}</description>
         <row>
