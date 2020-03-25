@@ -7,6 +7,9 @@ import favorites from 'lib/favorites.js'
 const ShowPage = ATV.Page.create({
   name: 'show',
   template: template,
+  events: {
+    highlight: 'onHighlight'
+  },
   ready (options, resolve, reject) {
     let getShow
     let getShowEpisodes
@@ -35,6 +38,17 @@ const ShowPage = ATV.Page.create({
         // error
         reject()
       })
+  },
+  onHighlight(e) {
+    let element = e.target
+    let elementType = element.nodeName
+
+    if (elementType === 'listItemLockup') {
+      var ph = element.getElementsByTagName("placeholder").item(0)
+
+      var doc = getActiveDocument()
+      doc.getElementById('show-description').innerHTML = ph.innerHTML
+    }
   },
   afterReady (doc) {
     const changeFavorites = () => {

@@ -4,6 +4,7 @@
       <relatedContent>
         <itemBanner>
           <heroImg src="{{ show.attributes.asset.url }}" />
+          <description id="show-description" style="tv-text-max-lines: 3">{{removeHTML show.attributes.description }}</description>
           <row>
             <buttonLockup>
               <badge src="resource://button-add"/>
@@ -33,6 +34,7 @@
           {{/if}}
           <title>{{ attributes.title }}</title>
           <subtitle>{{longDate attributes.since }}  {{timeLength attributes.since attributes.till }}</subtitle>
+          <placeholder>{{removeHTML attributes.description }}</placeholder>
         </listItemLockup>
         {{/each}}
         {{#if links.next}}
