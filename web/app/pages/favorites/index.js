@@ -26,9 +26,30 @@ const FavoritesPage = ATV.Page.create({
       Promise
         .all(promises)
         .then(() => {
-          resolve({
-            favorites: favorites
-          })
+          var shows = []
+          var serials = []
+          var topics = []
+
+          for (var f of favorites) {
+            if (f.type == 'show')
+              shows.push(f)
+            else if (f.type == 'serial')
+              serials.push(f)
+            else if (f.type == 'topic')
+              topics.push(f)
+          }
+
+          if (shows.length > 0 || serials.length > 0 || topics.length > 0) {
+            resolve({
+              favorites: {
+                shows: shows,
+                serials: serials,
+                topics: topics
+              }
+            })
+          }
+          else
+            resolve({})
         }, (xhr) => {
           // error
           reject(xhr)
