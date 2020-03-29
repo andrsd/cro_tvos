@@ -22,7 +22,7 @@ const ShowPage = ATV.Page.create({
     else {
       var show_id = options.id
       getShow = ATV.Ajax.get(API.url.show(show_id))
-      getShowEpisodes = ATV.Ajax.get(API.url.showEpisodes(show_id) + `?sort=-since`)
+      getShowEpisodes = ATV.Ajax.get(API.url.showEpisodes(show_id) + `?page[limit]=10&sort=-since`)
     }
 
     Promise
