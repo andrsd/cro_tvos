@@ -91,6 +91,15 @@ const HomePage = ATV.Page.create({
           type: 'document'
         })
       })
+  },
+  afterReady(doc) {
+    const navigateToTopics = () => {
+      ATV.Navigation.navigate("topics")
+    }
+
+    doc
+      .getElementById('btn-topics')
+      .addEventListener('select', navigateToTopics)
   }
 })
 

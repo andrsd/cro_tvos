@@ -55,10 +55,6 @@ ATV.start({
       page: SerialsPage,
       attributes: { reloadOnSelect: true }
     },{
-      id: 'topics',
-      name: 'Témata',
-      page: TopicsPage,
-    },{
       id: 'search',
       name: 'Hledat',
       page: SearchPage,
