@@ -1,5 +1,6 @@
 import ATV from 'atvjs'
 import template from './template.hbs'
+import NowPlayingPage from 'pages/now-playing'
 
 import API from 'lib/rozhlas.js'
 
@@ -14,16 +15,16 @@ const EpisodePage = ATV.Page.create({
       Promise
         .all([getEpisode, getRelatedEpisodes])
         .then((xhrs) => {
-          let episode = xhrs[0].response.data
+          this.episode = xhrs[0].response.data
 
           var related = []
           for (var r of xhrs[1].response.data) {
-            if (r.id != episode.id)
+            if (r.id != this.episode.id)
               related.push(r)
           }
 
           resolve({
-            episode: episode,
+            episode: this.episode,
             related: related
           })
         }, (xhr) => {
@@ -32,14 +33,12 @@ const EpisodePage = ATV.Page.create({
         })
     }
     else {
-      var episode
-
       Promise
         .all([getEpisode])
         .then((xhrs) => {
-          episode = xhrs[0].response.data
+          this.episode = xhrs[0].response.data
 
-          return new ATV.Ajax.get(API.url.showEpisodes(episode.relationships.show.data.id) + `?page[limit]=10&sort=-since`, {})
+          return new ATV.Ajax.get(API.url.showEpisodes(this.episode.relationships.show.data.id) + `?page[limit]=10&sort=-since`, {})
         }, (xhr) => {
           // error
           reject()
@@ -47,19 +46,29 @@ const EpisodePage = ATV.Page.create({
         .then((res) => {
           var related = []
           for (var r of res.response.data) {
-            if (r.id != episode.id)
+            if (r.id != this.episode.id)
               related.push(r)
           }
 
           resolve({
-            episode: episode,
+            episode: this.episode,
             related: related
           })
         }, () => {
           reject()
         })
     }
-  }
+  },
+  afterReady (doc) {
+    const addToQueue = () => {
+      NowPlayingPage.addEpisodeToPlaylist(this.episode)
+    }
+
+    doc
+      .getElementById('add-btn')
+      .addEventListener('select', addToQueue)
+  },
+  episode: null
 })
 
 export default EpisodePage

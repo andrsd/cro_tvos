@@ -6,9 +6,9 @@
           <heroImg src="{{ serial.attributes.asset.url }}" />
           <description id="serial-description" style="tv-text-max-lines: 3">{{removeHTML serial.attributes.description }}</description>
           <row>
-            <buttonLockup>
+            <buttonLockup id="add-btn">
               <badge src="resource://button-add"/>
-              <title>Přidat</title>
+              <title>Do fronty</title>
             </buttonLockup>
             <buttonLockup id="fav-btn">{{{ ratedButton }}}</buttonLockup>
           </row>
@@ -22,7 +22,7 @@
       </header>
       <section>
         {{#each episodes}}
-        <listItemLockup data-href-page="play-episode" data-href-page-options="{{toJSON this }}">
+        <listItemLockup id="{{ id }}" data-href-page="now-playing" data-href-page-options="{{toJSON this }}">
           {{#if attributes.part}}
           <ordinal minLength="2">{{attributes.part}}</ordinal>
           {{/if}}

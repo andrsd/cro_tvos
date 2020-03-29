@@ -22,9 +22,9 @@ import TopicPage from 'pages/topic'
 import ShowsPage from 'pages/shows'
 import ShowPage from 'pages/show'
 import EpisodePage from 'pages/episode'
-import PlayEpisodePage from 'pages/play-episode'
 import SearchPage from 'pages/search'
 import FavoritesPage from 'pages/favorites'
+import NowPlayingPage from 'pages/now-playing'
 
 ATV.start({
   style: css,
@@ -45,20 +45,15 @@ ATV.start({
       page: FavoritesPage,
       attributes: { reloadOnSelect: true }
     },{
-      id: 'shows',
-      name: 'Pořady',
-      page: ShowsPage,
-      attributes: { reloadOnSelect: true }
-    },{
-      id: 'serials',
-      name: 'Seriály',
-      page: SerialsPage,
-      attributes: { reloadOnSelect: true }
-    },{
       id: 'search',
       name: 'Hledat',
       page: SearchPage,
       attributes: { reloadOnSelect: true }
+    },{
+      id: 'now-playing',
+      name: 'Nyní hrajeme',
+      page: NowPlayingPage,
+      attributes: { reloadOnSelect: false }
     }]
   },
   templates: {
