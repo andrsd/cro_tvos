@@ -25,7 +25,9 @@
             {{#each dashboard }}
             <lockup data-href-page="topic" data-href-page-options="{{toJSON this }}">
               <img src="{{ attributes.asset.url }}" style="width: 370; height: 370"/>
-              <title>{{ attributes.title }}</title>
+              <overlay>
+                <title>{{ attributes.title }}</title>
+              </overlay>
             </lockup>
             {{/each}}
           </section>

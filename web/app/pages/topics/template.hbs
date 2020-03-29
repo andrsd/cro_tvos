@@ -9,7 +9,9 @@
           {{#each topics }}
           <lockup data-href-page="topic" data-href-page-options="{{toJSON this }}">
             <img src="{{ attributes.asset.url }}" width="300" height="300" />
-            <title>{{ attributes.title }}</title>
+            <overlay>
+              <title>{{ attributes.title }}</title>
+            </overlay>
           </lockup>
           {{/each}}
         </section>
