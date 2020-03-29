@@ -1,60 +1,54 @@
 <document>
-  <listTemplate>
-    <banner>
-      <title>Téma: {{ attributes.title }}</title>
-    </banner>
+  <compilationTemplate>
     <list>
+      <relatedContent>
+        <itemBanner>
+          <heroImg src="{{ topic.attributes.asset.url }}" />
+          <description id="show-description" style="tv-text-max-lines: 2"></description>
+          <row>
+            <buttonLockup id="fav-btn">{{{ ratedButton }}}</buttonLockup>
+          </row>
+        </itemBanner>
+      </relatedContent>
+      <header>
+        <title>{{ topic.attributes.title }}</title>
+      </header>
       {{#if carousel}}
       <section>
         {{#each carousel }}
         <listItemLockup data-href-page="{{ entity.type }}" data-href-page-options="{{toJSON entity }}">
+          <ordinal minLength="1">&#8194;</ordinal>
           <title>{{ title }}</title>
-          <relatedContent>
-            <lockup>
-              <img src="{{ fullImageURL image }}"/>
-              <description>{{removeHTML description }}</description>
-            </lockup>
-          </relatedContent>
+          <placeholder>{{removeHTML description }}</placeholder>
         </listItemLockup>
         {{/each}}
       </section>
       {{/if}}
       {{#if shows}}
       <section>
+        <header>
+          <title>Pořady</title>
+        </header>
         {{#each shows }}
         <listItemLockup data-href-page="show" data-href-page-options="{{toJSON this }}">
           <title>{{ attributes.title }}</title>
-          <subtitle>Pořad</subtitle>
-          <relatedContent>
-            <lockup>
-              <img src="{{ attributes.asset.url }}"/>
-              <description>{{removeHTML attributes.description }}</description>
-            </lockup>
-          </relatedContent>
+          <placeholder>{{removeHTML attributes.description }}</placeholder>
         </listItemLockup>
         {{/each}}
       </section>
       {{/if}}
       {{#if episodes}}
-      <section style="padding-top: 40">
+      <section>
         {{#each episodes }}
-        <listItemLockup data-href-page="episode" data-href-page-options="{{toJSON this }}">
+        <listItemLockup id="{{ id }}" data-href-page="episode" data-href-page-options="{{toJSON this }}">
+          <ordinal minLength="1">{{{watchedState watched }}}</ordinal>
           <title>{{ attributes.title }}</title>
           <subtitle>{{longDate attributes.since }}  {{timeLength attributes.since attributes.till }} {{#if attributes.part}} ({{attributes.part}}. díl){{/if}}</subtitle>
-          <relatedContent>
-            <lockup>
-              {{#if attributes.asset.url}}
-                <img src="{{ attributes.asset.url }}" />
-              {{else}}
-                <img src="{{ @root.attributes.asset.url }}" />
-              {{/if}}
-              <description>{{removeHTML attributes.description }}</description>
-            </lockup>
-          </relatedContent>
+          <placeholder>{{removeHTML attributes.description }}</placeholder>
         </listItemLockup>
         {{/each}}
       </section>
       {{/if}}
     </list>
-  </listTemplate>
+  </compilationTemplate>
 </document>
