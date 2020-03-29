@@ -5,6 +5,7 @@ import errorTpl from 'shared/templates/error.hbs'
 import API from 'lib/rozhlas.js'
 import HB from 'lib/template-helpers.js'
 import favorites from 'lib/favorites.js'
+import History from 'lib/history.js'
 import NowPlayingPage from 'pages/now-playing'
 
 const SerialPage = ATV.Page.create({
@@ -21,13 +22,16 @@ const SerialPage = ATV.Page.create({
       .all([getSerialInfo, getSerialEpisodes])
       .then((xhrs) => {
         this.serial = xhrs[0].response.data
-        for (var e of xhrs[1].response.data)
+        this.episodes = {}
+        for (var e of xhrs[1].response.data) {
+          e.watched = History.watched(e.id)
           this.episodes[e.id] = e
+        }
 
         resolve({
           ratedButton: favorites.getRatedButton(favorites.isFavorite(this.serial.id)),
           serial: this.serial,
-          episodes: xhrs[1].response.data
+          episodes: Object.values(this.episodes)
         })
       }, (xhrs) => {
         reject()

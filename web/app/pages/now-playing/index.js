@@ -1,9 +1,11 @@
 import ATV from 'atvjs'
 import template from './template.hbs'
 import HB from 'lib/template-helpers.js'
+import History from 'lib/history.js'
 
 var player = new Player()
 var playlist = new Playlist()
+var episode_id = null
 
 const NowPlayingPage = ATV.Page.create({
   name: 'now-playing',
@@ -14,6 +16,9 @@ const NowPlayingPage = ATV.Page.create({
     if (options) {
       var mediaItem = this.buildMediaItem(options)
       if (mediaItem) {
+        episode_id = mediaItem.id
+        History.set(episode_id, 0.5)
+
         player.playlist = new Playlist()
         player.playlist.push(mediaItem)
         player.play()
@@ -54,7 +59,8 @@ const NowPlayingPage = ATV.Page.create({
       }
 
       if (url) {
-        const mediaItem = new MediaItem('audio', url)
+        var mediaItem = new MediaItem('audio', url)
+        mediaItem.id = episode.id
         mediaItem.title = episode.attributes.title
         mediaItem.description = HB.helpers.removeHTML(episode.attributes.description)
         if (typeof episode.attributes.asset != 'undefined' &&
@@ -95,6 +101,17 @@ const NowPlayingPage = ATV.Page.create({
   init() {
     if (player.playlist == null) {
       player.playlist = playlist
+      player.addEventListener('mediaItemDidChange', function(e) {
+        if (player && player.currentMediaItem) {
+          episode_id = player.currentMediaItem.id
+          History.set(episode_id, 0.5)
+        }
+      })
+      player.addEventListener('stateDidChange', function(stateObj) {
+        if (stateObj.state == 'end') {
+          History.set(episode_id, 1.)
+        }
+      })
     }
   }
 })

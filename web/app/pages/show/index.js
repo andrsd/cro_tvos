@@ -3,6 +3,7 @@ import template from './template.hbs'
 
 import API from 'lib/rozhlas.js'
 import favorites from 'lib/favorites.js'
+import History from 'lib/history.js'
 import NowPlayingPage from 'pages/now-playing'
 
 const ShowPage = ATV.Page.create({
@@ -29,13 +30,16 @@ const ShowPage = ATV.Page.create({
       .all([getShow, getShowEpisodes])
       .then((xhrs) => {
         this.show = xhrs[0].response.data
-        for (var e of xhrs[1].response.data)
+        this.episodes = {}
+        for (var e of xhrs[1].response.data) {
+          e.watched = History.watched(e.id)
           this.episodes[e.id] = e
+        }
 
         resolve({
           ratedButton: favorites.getRatedButton(favorites.isFavorite(this.show.id)),
           show: xhrs[0].response.data,
-          episodes: xhrs[1].response.data,
+          episodes: Object.values(this.episodes),
           links: xhrs[1].response.links
         })
       }, (xhr) => {
