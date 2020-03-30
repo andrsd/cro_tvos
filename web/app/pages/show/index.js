@@ -35,12 +35,16 @@ const ShowPage = ATV.Page.create({
           e.watched = History.watched(e.id)
           this.episodes[e.id] = e
         }
+        var serials = null
+        if (this.show.relationships.serials.data.length > 0)
+          serials = this.show.relationships.serials.data.length
 
         resolve({
           ratedButton: favorites.getRatedButton(favorites.isFavorite(this.show.id)),
           show: xhrs[0].response.data,
           episodes: Object.values(this.episodes),
-          links: xhrs[1].response.links
+          links: xhrs[1].response.links,
+          serials: serials
         })
       }, (xhr) => {
         // error
@@ -80,6 +84,13 @@ const ShowPage = ATV.Page.create({
     doc
       .getElementById('add-btn')
       .addEventListener('select', addToQueue)
+
+    const onShowSerials = () => {
+      ATV.Navigation.navigate('show-serials', this.show)
+    }
+    var serials_btn = doc.getElementById('serials-btn')
+    if (serials_btn)
+      serials_btn.addEventListener('select', onShowSerials)
   },
   show: null,
   episodes: {},

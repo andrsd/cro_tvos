@@ -4,12 +4,18 @@
       <relatedContent>
         <itemBanner>
           <heroImg src="{{ show.attributes.asset.url }}" />
-          <description id="show-description" style="tv-text-max-lines: 3">{{removeHTML show.attributes.description }}</description>
+          <description id="show-description" style="tv-text-max-lines: 2">{{removeHTML show.attributes.description }}</description>
           <row>
             <buttonLockup id="add-btn">
               <badge src="resource://button-add"/>
               <title>Do fronty</title>
             </buttonLockup>
+            {{#if serials}}
+            <buttonLockup id="serials-btn">
+              <badge src="resource://list-chevron"/>
+              <title>Seriály</title>
+            </buttonLockup>
+            {{/if}}
             <buttonLockup id="fav-btn">{{{ ratedButton }}}</buttonLockup>
           </row>
         </itemBanner>

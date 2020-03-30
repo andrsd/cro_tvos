@@ -1,0 +1,39 @@
+<document>
+  <productTemplate>
+    <banner>
+      <stack>
+        <title>{{ show.attributes.title }}</title>
+        <description allowsZooming="true" moreLabel="more">{{ show.attributes.description }}</description>
+      </stack>
+      <heroImg src="{{ show.attributes.asset.url }}" style="width: 700;"/>
+    </banner>
+    <shelf>
+      <header>
+        <title>Seriály pořadu</title>
+      </header>
+      <section>
+        {{#each serials }}
+        <lockup data-href-page="serial" data-href-page-options="{{toJSON this }}">
+          <img src="{{ attributes.asset.url }}" width="226" height="150" />
+          <title>{{ attributes.title }}</title>
+        </lockup>
+        {{/each}}
+      </section>
+    </shelf>
+    {{#if participants}}
+    <shelf>
+      <header>
+        <title>Účinkující</title>
+      </header>
+      <section>
+        {{#each participants }}
+        <monogramLockup>
+          <monogram src="{{ attributes.asset.url }}" />
+          <title>{{ attributes.title }}</title>
+        </monogramLockup>
+        {{/each}}
+      </section>
+    </shelf>
+    {{/if}}
+  </productTemplate>
+</document>
