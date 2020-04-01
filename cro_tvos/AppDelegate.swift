@@ -8,16 +8,18 @@
 
 import UIKit
 import TVMLKit
+import GCDWebServers
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationControllerDelegate {
 
     var window: UIWindow?
     var appController: TVApplicationController?
+    var webServer: GCDWebServer?
 
     // tvBaseURL points to a server on your local machine. To create a local server for testing purposes, use the following command inside your project folder from the Terminal app: ruby -run -ehttpd . -p9009. See NSAppTransportSecurity for information on using a non-secure server.
-    static let tvBaseURL = "http://localhost:9009/"
-    static let tvBootURL = "\(AppDelegate.tvBaseURL)/app.js"
+    var tvBaseURL: URL?
+    var tvBootURL: URL?
 
     // MARK: Javascript Execution Helper
 
@@ -34,6 +36,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationControllerDe
     // MARK: UIApplicationDelegate
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+
+        initWebServer()
+
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.main.bounds)
 
@@ -41,11 +46,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationControllerDe
         let appControllerContext = TVApplicationControllerContext()
 
         // The JavaScript URL is used to create the JavaScript context for your TVMLKit application. Although it is possible to separate your JavaScript into separate files, to help reduce the launch time of your application we recommend creating minified and compressed version of this resource. This will allow for the resource to be retrieved and UI presented to the user quickly.
-        if let javaScriptURL = URL(string: AppDelegate.tvBootURL) {
-            appControllerContext.javaScriptApplicationURL = javaScriptURL
-        }
+        appControllerContext.javaScriptApplicationURL = tvBootURL!
 
-        appControllerContext.launchOptions["BASEURL"] = AppDelegate.tvBaseURL as NSString
+        appControllerContext.launchOptions["BASEURL"] = tvBaseURL!.absoluteString as NSString
 
         if let launchOptions = launchOptions {
             for (kind, value) in launchOptions {
@@ -107,5 +110,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationControllerDe
 
     func appController(_ appController: TVApplicationController, didStop options: [String: Any]?) {
         print("\(#function) invoked with options: \(options ?? [:])")
+    }
+
+    func initWebServer() {
+        webServer = GCDWebServer()
+
+        let mainBundle = Bundle.main
+        let folderPath = mainBundle.path(forResource: "dist", ofType: nil) ?? ""
+
+        webServer!.addGETHandler(
+            forBasePath: "/",
+            directoryPath: folderPath,
+            indexFilename: "",
+            cacheAge: 3600,
+            allowRangeRequests: true)
+
+        webServer!.start(
+            withPort: 9009,
+            bonjourName: nil)
+
+        tvBaseURL = webServer!.serverURL ?? URL(string: "localhost")
+        tvBootURL = URL(string: "/app.js", relativeTo: tvBaseURL)
     }
 }
