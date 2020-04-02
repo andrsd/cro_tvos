@@ -6,13 +6,13 @@ import API from 'lib/rozhlas.js'
 import HB from 'lib/template-helpers.js'
 import favorites from 'lib/favorites.js'
 import History from 'lib/history.js'
-import NowPlayingPage from 'pages/now-playing'
 
 const SerialPage = ATV.Page.create({
   name: 'serial',
   template: template,
   events: {
-    highlight: 'onHighlight'
+    highlight: 'onHighlight',
+    holdselect: 'onHoldSelect'
   },
   ready (options, resolve, reject) {
     let getSerialInfo = ATV.Ajax.get(API.url.serial(options.id))
@@ -51,6 +51,17 @@ const SerialPage = ATV.Page.create({
       this.currentEpisodeId = id
     }
   },
+  onHoldSelect(e) {
+    let element = e.target
+    let elementType = element.nodeName
+
+    if (elementType === 'listItemLockup') {
+      var id = element.getAttribute('id')
+      ATV.Navigation.navigate('episode-context-menu', {
+        episode: this.episodes[this.currentEpisodeId]
+      })
+    }
+  },
   afterReady (doc) {
     const changeFavorites = () => {
       if (this.serial) {
@@ -62,14 +73,6 @@ const SerialPage = ATV.Page.create({
     doc
       .getElementById('fav-btn')
       .addEventListener('select', changeFavorites)
-
-    const addToQueue = () => {
-      NowPlayingPage.addEpisodeToPlaylist(this.episodes[this.currentEpisodeId])
-    }
-
-    doc
-      .getElementById('add-btn')
-      .addEventListener('select', addToQueue)
   },
   serial: null,
   episodes: {},

@@ -6,10 +6,6 @@
           <heroImg src="{{ show.attributes.asset.url }}" />
           <description id="show-description" style="tv-text-max-lines: 2">{{removeHTML show.attributes.description }}</description>
           <row>
-            <buttonLockup id="add-btn">
-              <badge src="resource://button-add"/>
-              <title>Do fronty</title>
-            </buttonLockup>
             {{#if serials}}
             <buttonLockup id="serials-btn">
               <badge src="resource://list-chevron"/>

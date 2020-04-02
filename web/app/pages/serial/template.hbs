@@ -6,10 +6,6 @@
           <heroImg src="{{ serial.attributes.asset.url }}" />
           <description id="serial-description" style="tv-text-max-lines: 2">{{removeHTML serial.attributes.description }}</description>
           <row>
-            <buttonLockup id="add-btn">
-              <badge src="resource://button-add"/>
-              <title>Do fronty</title>
-            </buttonLockup>
             <buttonLockup id="fav-btn">{{{ ratedButton }}}</buttonLockup>
           </row>
         </itemBanner>

@@ -80,13 +80,7 @@ const NowPlayingPage = ATV.Page.create({
     var mediaItem = this.buildMediaItem(episode)
     if (mediaItem) {
       player.playlist.push(mediaItem)
-      ATV.Navigation.showError({
-        data: {
-          title: 'Přidáno do fronty',
-          message: episode.attributes.title
-        },
-        type: 'document'
-      })
+      ATV.Navigation.back()
     }
     else {
       ATV.Navigation.showError({
