@@ -95,6 +95,9 @@ const NowPlayingPage = ATV.Page.create({
   init() {
     if (player.playlist == null) {
       player.playlist = playlist
+      player.addEventListener('mediaItemWillChange', function(e) {
+        History.set(episode_id, 1.)
+      })
       player.addEventListener('mediaItemDidChange', function(e) {
         if (player && player.currentMediaItem) {
           episode_id = player.currentMediaItem.id
