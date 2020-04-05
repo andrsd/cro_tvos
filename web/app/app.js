@@ -77,7 +77,7 @@ ATV.start({
   },
   onLaunch (options) {
     ATV.Menu.setOptions({
-      loadingMessage: 'Loading'
+      loadingMessage: 'Nahráváme...'
     })
     ATV.Navigation.navigateToMenuPage()
   },
