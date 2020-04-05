@@ -32,7 +32,6 @@ const TopicPage = ATV.Page.create({
       .then((xhrs) => {
         var data = xhrs[0].response.data
         var carousel = []
-        var shows = []
         var episodes = []
         this.topic = {
           id: data.id,
@@ -48,12 +47,6 @@ const TopicPage = ATV.Page.create({
                 carousel.push(i)
             }
           }
-          else if (widget.type == 'shows_list') {
-            for (var i of widget.attributes.entities) {
-              if (i.type == 'show')
-                shows.push(i)
-            }
-          }
           else if (widget.type == 'episodes_list') {
             for (var ep of widget.attributes.entities) {
               if (ep.type == 'episode') {
@@ -66,7 +59,6 @@ const TopicPage = ATV.Page.create({
 
         resolve({
           carousel: carousel,
-          shows: shows,
           episodes: episodes,
           ratedButton: ratedButton,
           topic: this.topic

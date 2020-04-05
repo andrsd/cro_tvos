@@ -25,21 +25,6 @@
         {{/each}}
       </section>
       {{/if}}
-      {{#if shows}}
-      <section>
-        <header>
-          <title>Pořady</title>
-        </header>
-        {{#each shows }}
-        <listItemLockup data-href-page="show" data-href-page-options="{{toJSON this }}">
-          <img src="{{ image }}" width="90" height="90" contentsMode="aspectFill"/>
-          <title>{{ attributes.title }}</title>
-          <subtitle>Pořad</subtitle>
-          <placeholder>{{removeHTML attributes.description }}</placeholder>
-        </listItemLockup>
-        {{/each}}
-      </section>
-      {{/if}}
       {{#if episodes}}
       <section>
         <header>
