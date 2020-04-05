@@ -27,11 +27,13 @@ const SerialPage = ATV.Page.create({
           e.watched = History.watched(e.id)
           this.episodes[e.id] = e
         }
+        var eps = Object.values(this.episodes)
+        eps.sort((a, b) => (a.attributes.part > a.attributes.part) ? 1 : -1)
 
         resolve({
           ratedButton: favorites.getRatedButton(favorites.isFavorite(this.serial.id)),
           serial: this.serial,
-          episodes: Object.values(this.episodes)
+          episodes: eps
         })
       }, (xhrs) => {
         reject()
