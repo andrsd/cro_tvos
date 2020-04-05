@@ -6,12 +6,6 @@
           <heroImg src="{{ show.attributes.asset.url }}" />
           <description id="show-description" style="tv-text-max-lines: 2">{{removeHTML show.attributes.description }}</description>
           <row>
-            {{#if serials}}
-            <buttonLockup id="serials-btn">
-              <badge src="resource://list-chevron"/>
-              <title>Seriály</title>
-            </buttonLockup>
-            {{/if}}
             <buttonLockup id="fav-btn">{{{ ratedButton }}}</buttonLockup>
           </row>
         </itemBanner>
@@ -43,6 +37,21 @@
         </listItemLockup>
         {{/if}}
       </section>
+      {{#if serials}}
+      <section>
+        <header>
+          <title></title>
+        </header>
+        {{#each serials }}
+        <listItemLockup id="{{ id }}" data-href-page="serial" data-href-page-options="{{toJSON this }}">
+          <img src="{{ attributes.asset.url }}" width="90" height="90" contentsMode="aspectFill"/>
+          <title>{{ attributes.title }}</title>
+          <subtitle>Seriál {{#if attributes.totalParts}}{{numParts attributes.totalParts}}{{/if}}</subtitle>
+          <placeholder>{{removeHTML attributes.description }}</placeholder>
+        </listItemLockup>
+        {{/each}}
+      </section>
+      {{/if}}
     </list>
   </compilationTemplate>
 </document>

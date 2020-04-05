@@ -15,19 +15,22 @@ const ShowPage = ATV.Page.create({
   ready (options, resolve, reject) {
     let getShow
     let getShowEpisodes
+    let getShowSerials
     if (options && 'next' in options) {
       var result = options.next.match("shows\/(.+)\/episodes")
       getShow = ATV.Ajax.get(API.url.show(result[1]))
       getShowEpisodes = ATV.Ajax.get(options.next)
+      getShowSerials = ATV.Ajax.get(API.url.showSerials(result[1]))
     }
     else {
       var show_id = options.id
       getShow = ATV.Ajax.get(API.url.show(show_id))
       getShowEpisodes = ATV.Ajax.get(API.url.showEpisodes(show_id) + `?page[limit]=10&sort=-since`)
+      getShowSerials = ATV.Ajax.get(API.url.showSerials(show_id))
     }
 
     Promise
-      .all([getShow, getShowEpisodes])
+      .all([getShow, getShowEpisodes, getShowSerials])
       .then((xhrs) => {
         this.show = xhrs[0].response.data
         this.episodes = {}
@@ -35,16 +38,13 @@ const ShowPage = ATV.Page.create({
           e.watched = History.watched(e.id)
           this.episodes[e.id] = e
         }
-        var serials = null
-        if (this.show.relationships.serials.data.length > 0)
-          serials = this.show.relationships.serials.data.length
 
         resolve({
           ratedButton: favorites.getRatedButton(favorites.isFavorite(this.show.id)),
           show: xhrs[0].response.data,
           episodes: Object.values(this.episodes),
           links: xhrs[1].response.links,
-          serials: serials
+          serials: xhrs[2].response.data
         })
       }, (xhr) => {
         // error
@@ -87,13 +87,6 @@ const ShowPage = ATV.Page.create({
     doc
       .getElementById('fav-btn')
       .addEventListener('select', changeFavorites)
-
-    const onShowSerials = () => {
-      ATV.Navigation.navigate('show-serials', this.show)
-    }
-    var serials_btn = doc.getElementById('serials-btn')
-    if (serials_btn)
-      serials_btn.addEventListener('select', onShowSerials)
   },
   show: null,
   episodes: {},

@@ -54,6 +54,14 @@ const helpers = {
       return "&#9686;"
     else
       return "&#8194;"
+  },
+  numParts (parts) {
+    if (parts == 1)
+      return `${parts} díl`
+    else if (parts <= 4)
+      return `${parts} díly`
+    else
+      return `${parts} dílů`
   }
 }
 
