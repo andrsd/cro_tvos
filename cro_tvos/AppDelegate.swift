@@ -8,6 +8,7 @@
 
 import UIKit
 import TVMLKit
+import AVFoundation
 import GCDWebServers
 
 @UIApplicationMain
@@ -57,6 +58,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationControllerDe
         }
 
         appController = TVApplicationController(context: appControllerContext, window: window, delegate: self)
+
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(.playback, mode: .moviePlayback)
+        }
+        catch {
+            print("Setting category to AVAudioSessionCategoryPlayback failed.")
+        }
 
         return true
     }
