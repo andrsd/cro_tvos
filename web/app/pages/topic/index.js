@@ -111,9 +111,10 @@ const TopicPage = ATV.Page.create({
       }
     }
 
-    doc
-      .getElementById('fav-btn')
-      .addEventListener('select', changeFavorites)
+    if (doc.getElementById('fav-btn'))
+      doc
+        .getElementById('fav-btn')
+        .addEventListener('select', changeFavorites)
   },
   topic: null,
   episodes: null,
