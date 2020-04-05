@@ -17,8 +17,9 @@
       <section>
         {{#each carousel }}
         <listItemLockup data-href-page="{{ entity.type }}" data-href-page-options="{{toJSON entity }}">
-          <ordinal minLength="1">&#8194;</ordinal>
+          <img src="{{ image }}" width="90" height="90" contentsMode="aspectFill"/>
           <title>{{ title }}</title>
+          <subtitle>Pořad</subtitle>
           <placeholder>{{removeHTML description }}</placeholder>
         </listItemLockup>
         {{/each}}
@@ -31,7 +32,9 @@
         </header>
         {{#each shows }}
         <listItemLockup data-href-page="show" data-href-page-options="{{toJSON this }}">
+          <img src="{{ image }}" width="90" height="90" contentsMode="aspectFill"/>
           <title>{{ attributes.title }}</title>
+          <subtitle>Pořad</subtitle>
           <placeholder>{{removeHTML attributes.description }}</placeholder>
         </listItemLockup>
         {{/each}}
@@ -39,6 +42,9 @@
       {{/if}}
       {{#if episodes}}
       <section>
+        <header>
+          <title></title>
+        </header>
         {{#each episodes }}
         <listItemLockup id="{{ id }}" data-href-page="episode" data-href-page-options="{{toJSON this }}">
           <ordinal minLength="1">{{{watchedState watched }}}</ordinal>
