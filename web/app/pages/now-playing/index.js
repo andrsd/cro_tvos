@@ -62,6 +62,8 @@ const NowPlayingPage = ATV.Page.create({
         var mediaItem = new MediaItem('audio', url)
         mediaItem.id = episode.id
         mediaItem.title = episode.attributes.title
+        if (episode.attributes.part)
+          mediaItem.title += ` (${episode.attributes.part}. díl)`
         mediaItem.description = HB.helpers.removeHTML(episode.attributes.description)
         if (typeof episode.attributes.asset != 'undefined' &&
             typeof episode.attributes.asset.url != 'undefined')
