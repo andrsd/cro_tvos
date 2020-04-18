@@ -2,6 +2,7 @@
 
 Neoficialni klient pro mujrozhlas.cz pro Apple TV
 
+![home-screen](docs/img/home-screen.png)
 
 ### Podekovani
 
