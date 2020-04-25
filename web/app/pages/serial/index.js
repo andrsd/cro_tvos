@@ -56,9 +56,11 @@ const SerialPage = ATV.Page.create({
 
     if (elementType === 'listItemLockup') {
       var episode = JSON.parse(element.getAttribute('data-href-page-options'))
-      ATV.Navigation.navigate('episode-context-menu', {
-        episode: episode
-      })
+      if (episode.type == 'episode') {
+        ATV.Navigation.navigate('episode-context-menu', {
+          episode: episode
+        })
+      }
     }
   },
   afterReady (doc) {
