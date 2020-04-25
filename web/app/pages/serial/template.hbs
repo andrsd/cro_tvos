@@ -18,7 +18,7 @@
       </header>
       <section>
         {{#each episodes}}
-        <listItemLockup id="{{ id }}" data-href-page="now-playing" data-href-page-options="{{toJSON this }}">
+        <listItemLockup data-href-page="now-playing" data-href-page-options="{{toJSON this }}">
           <ordinal minLength="1">{{{watchedState watched }}}</ordinal>
           <title>{{ attributes.title }}</title>
           <subtitle>{{longDate attributes.since }}  {{timeLength attributes.since attributes.till }} {{#if attributes.part}}({{attributes.part}}. díl){{/if}}</subtitle>
