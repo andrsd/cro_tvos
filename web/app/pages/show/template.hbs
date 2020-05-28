@@ -24,8 +24,8 @@
       </header>
       <section>
         {{#each episodes}}
-        <listItemLockup id="{{ id }}" data-href-page="now-playing" data-href-page-options="{{toJSON this }}">
-          <ordinal minLength="1">{{{watchedState watched }}}</ordinal>
+        <listItemLockup data-href-page="now-playing" data-href-page-options="{{toJSON this }}">
+          <ordinal minLength="2">{{{watchedState watched }}}</ordinal>
           <title>{{ attributes.title }}</title>
           <subtitle>{{longDate attributes.since }}  {{timeLength attributes.since attributes.till }}  {{#if attributes.part}}({{attributes.part}}. díl){{/if}}</subtitle>
           <placeholder>{{removeHTML attributes.description }}</placeholder>
@@ -43,7 +43,7 @@
           <title></title>
         </header>
         {{#each serials }}
-        <listItemLockup id="{{ id }}" data-href-page="serial" data-href-page-options="{{toJSON this }}">
+        <listItemLockup data-href-page="serial" data-href-page-options="{{toJSON this }}">
           <img src="{{ attributes.asset.url }}" width="90" height="90" contentsMode="aspectFill"/>
           <title>{{ attributes.title }}</title>
           <subtitle>Seriál {{#if attributes.totalParts}}{{numParts attributes.totalParts}}{{/if}}</subtitle>

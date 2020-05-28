@@ -22,12 +22,12 @@ const SerialPage = ATV.Page.create({
       .all([getSerialInfo, getSerialEpisodes])
       .then((xhrs) => {
         this.serial = xhrs[0].response.data
-        this.episodes = {}
+        var episodes = {}
         for (var e of xhrs[1].response.data) {
           e.watched = History.watched(e.id)
-          this.episodes[e.id] = e
+          episodes[e.id] = e
         }
-        var eps = Object.values(this.episodes)
+        var eps = Object.values(episodes)
         eps.sort((a, b) => (a.attributes.part > a.attributes.part) ? 1 : -1)
 
         resolve({
@@ -48,9 +48,6 @@ const SerialPage = ATV.Page.create({
 
       var doc = getActiveDocument()
       doc.getElementById('serial-description').innerHTML = ph.innerHTML
-
-      var id = element.getAttribute('id')
-      this.currentEpisodeId = id
     }
   },
   onHoldSelect(e) {
@@ -58,10 +55,12 @@ const SerialPage = ATV.Page.create({
     let elementType = element.nodeName
 
     if (elementType === 'listItemLockup') {
-      var id = element.getAttribute('id')
-      ATV.Navigation.navigate('episode-context-menu', {
-        episode: this.episodes[this.currentEpisodeId]
-      })
+      var episode = JSON.parse(element.getAttribute('data-href-page-options'))
+      if (episode.type == 'episode') {
+        ATV.Navigation.navigate('episode-context-menu', {
+          episode: episode
+        })
+      }
     }
   },
   afterReady (doc) {
@@ -77,8 +76,6 @@ const SerialPage = ATV.Page.create({
       .addEventListener('select', changeFavorites)
   },
   serial: null,
-  episodes: {},
-  currentEpisodeId: null
 })
 
 export default SerialPage

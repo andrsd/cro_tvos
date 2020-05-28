@@ -33,16 +33,16 @@ const ShowPage = ATV.Page.create({
       .all([getShow, getShowEpisodes, getShowSerials])
       .then((xhrs) => {
         this.show = xhrs[0].response.data
-        this.episodes = {}
+        var episodes = {}
         for (var e of xhrs[1].response.data) {
           e.watched = History.watched(e.id)
-          this.episodes[e.id] = e
+          episodes[e.id] = e
         }
 
         resolve({
           ratedButton: favorites.getRatedButton(favorites.isFavorite(this.show.id)),
           show: xhrs[0].response.data,
-          episodes: Object.values(this.episodes),
+          episodes: Object.values(episodes),
           links: xhrs[1].response.links,
           serials: xhrs[2].response.data
         })
@@ -60,9 +60,6 @@ const ShowPage = ATV.Page.create({
 
       var doc = getActiveDocument()
       doc.getElementById('show-description').innerHTML = ph.innerHTML
-
-      var id = element.getAttribute('id')
-      this.currentEpisodeId = id
     }
   },
   onHoldSelect(e) {
@@ -70,10 +67,12 @@ const ShowPage = ATV.Page.create({
     let elementType = element.nodeName
 
     if (elementType === 'listItemLockup') {
-      var id = element.getAttribute('id')
-      ATV.Navigation.navigate('episode-context-menu', {
-        episode: this.episodes[this.currentEpisodeId]
-      })
+      var episode = JSON.parse(element.getAttribute('data-href-page-options'))
+      if (episode.type == 'episode') {
+        ATV.Navigation.navigate('episode-context-menu', {
+          episode: episode
+        })
+      }
     }
   },
   afterReady (doc) {
@@ -88,9 +87,7 @@ const ShowPage = ATV.Page.create({
       .getElementById('fav-btn')
       .addEventListener('select', changeFavorites)
   },
-  show: null,
-  episodes: {},
-  currentEpisodeId: null
+  show: null
 })
 
 export default ShowPage
