@@ -290,7 +290,7 @@
 			buildPhases = (
 			);
 			buildToolPath = /usr/local/bin/npm;
-			buildWorkingDirectory = /Users/andrsd/devel/cro_tvos;
+			buildWorkingDirectory = "$(SRCROOT)/cro_tvos";
 			dependencies = (
 			);
 			name = web;
