@@ -63,10 +63,9 @@
     "string-strip-html": "^4.3.21"
   },
   "nyc": {
+    "all": true,
     "include": [
       "web/app/**/*.js"
-    ],
-    "sourceMap": false,
-    "instrument": false
+    ]
   }
 }
