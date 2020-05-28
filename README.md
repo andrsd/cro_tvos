@@ -1,6 +1,7 @@
 # cro_tvos
 
 [![Build Status](https://travis-ci.org/andrsd/cro_tvos.svg?branch=master)](https://travis-ci.org/andrsd/cro_tvos)
+[![codecov](https://codecov.io/gh/andrsd/cro_tvos/branch/master/graph/badge.svg)](https://codecov.io/gh/andrsd/cro_tvos)
 
 Neoficialni klient pro mujrozhlas.cz pro Apple TV
 
