@@ -1,5 +1,7 @@
 # cro_tvos
 
+[![Build Status](https://travis-ci.org/andrsd/cro_tvos.svg?branch=master)](https://travis-ci.org/andrsd/cro_tvos)
+
 Neoficialni klient pro mujrozhlas.cz pro Apple TV
 
 ![home-screen](docs/img/home-screen.png)
