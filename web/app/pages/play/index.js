@@ -16,10 +16,10 @@ const PlayPage = ATV.Page.create({
     var dd = String(today.getUTCDate()).padStart(2, '0')
 
     let getStationInfo = ATV.Ajax.get(API.url.stationInfo(options.id), {})
-    let getSchedule = ATV.Ajax.get(API.url.stationSchedule(options.stationCode, yyyy, mm, dd), {})
+    let getCurrentSchedule = ATV.Ajax.get(API.url.scheduleCurrent, {})
 
     Promise
-      .all([getStationInfo, getSchedule])
+      .all([getStationInfo, getCurrentSchedule])
       .then((xhrs) => {
         // success
         schedule = xhrs[1].response
@@ -27,9 +27,9 @@ const PlayPage = ATV.Page.create({
         var now = new Date()
         var current_entry = null
         for (var entry of schedule.data) {
-          var since = Date.parse(entry.since)
-          var till = Date.parse(entry.till)
-          if (since <= now && now < till)
+          var since = Date.parse(entry.attributes.since)
+          var till = Date.parse(entry.attributes.till)
+          if (since <= now && now < till && entry.relationships.station.data.id == options.id)
             current_entry = entry
         }
 
@@ -47,9 +47,8 @@ const PlayPage = ATV.Page.create({
         const tvosPlaylist = new Playlist()
         const mediaItem = new MediaItem('audio', playlist)
         if (current_entry != null) {
-          mediaItem.title = current_entry.title
-          mediaItem.description = HB.helpers.removeHTML(options.attributes.description)
-          mediaItem.artworkImageURL = current_entry.edition.asset
+          mediaItem.title = current_entry.attributes.mirroredShow.title
+          mediaItem.artworkImageURL = current_entry.attributes.asset.url
         }
         else {
           mediaItem.title = live_station.data.attributes.title
