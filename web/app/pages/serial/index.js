@@ -24,12 +24,11 @@ const SerialPage = ATV.Page.create({
       .all([getSerialInfo, getSerialEpisodes])
       .then((xhrs) => {
         this.serial = xhrs[0].response.data
-        var episodes = {}
         for (var e of xhrs[1].response.data) {
           e.watched = History.watched(e.id)
-          episodes[e.id] = e
+          this.episodes[e.id] = e
         }
-        var eps = Object.values(episodes)
+        var eps = Object.values(this.episodes)
         eps.sort((a, b) => (a.attributes.part > a.attributes.part) ? 1 : -1)
 
         resolve({
@@ -109,8 +108,21 @@ const SerialPage = ATV.Page.create({
           doc.getElementById('fav-btn').innerHTML = favorites.getRatedButton(is_favorite)
         }
       })
+
+    doc
+      .getElementById('play-serial-btn')
+      .addEventListener('select', () => {
+        var eps = Object.values(this.episodes)
+        eps.sort((a, b) => (a.attributes.part > a.attributes.part) ? -1 : 1)
+
+        for (var episode of eps) {
+          NowPlayingPage.addEpisodeToPlaylist(episode)
+        }
+        NowPlayingPage.play()
+      })
   },
   serial: null,
+  episodes: {},
 })
 
 export default SerialPage
