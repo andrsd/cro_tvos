@@ -52,7 +52,7 @@ const PlayPage = ATV.Page.create({
           mediaItem.artworkImageURL = current_entry.edition.asset
         }
         else {
-          mediaItem.title = mm + " " + dd + " " + live_station.data.attributes.title
+          mediaItem.title = live_station.data.attributes.title
           mediaItem.artworkImageURL = live_station.data.attributes.asset.url
         }
         tvosPlaylist.push(mediaItem)
