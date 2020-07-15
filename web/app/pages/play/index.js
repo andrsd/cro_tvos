@@ -37,7 +37,7 @@ const PlayPage = ATV.Page.create({
         var bitrate = 0
         let playlist
         for (var pl of live_station.data.attributes.audioLinks) {
-          if (pl.variant == 'mp3' && pl.linkType == "livestream" && pl.bitrate > bitrate) {
+          if (pl.variant == 'mp3' && pl.linkType == "directstream" && pl.bitrate > bitrate) {
             bitrate = pl.bitrate
             playlist = pl.url
           }
