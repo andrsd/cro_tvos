@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0253AAD5241BE7F7004283BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0253AAD4241BE7F7004283BD /* AppDelegate.swift */; };
 		0253AAD8241BE7F9004283BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0253AAD7241BE7F9004283BD /* Assets.xcassets */; };
+		02585FEF24BFAC3100C1102D /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02585FEE24BFAC3100C1102D /* CoreServices.framework */; };
 		02642997243510FF005FA8A6 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 02642996243510FF005FA8A6 /* libz.tbd */; };
 		026429FE24353B12005FA8A6 /* GCDWebServers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 026429F724353B12005FA8A6 /* GCDWebServers.framework */; };
 		026429FF24353B12005FA8A6 /* GCDWebServers.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 026429F724353B12005FA8A6 /* GCDWebServers.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -41,7 +42,6 @@
 		02642A3C24353B54005FA8A6 /* GCDWebServerErrorResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 02642A2024353B54005FA8A6 /* GCDWebServerErrorResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		02642A3D24353B54005FA8A6 /* GCDWebServerStreamedResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 02642A2124353B54005FA8A6 /* GCDWebServerStreamedResponse.m */; };
 		02642A3F24353B93005FA8A6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02642A3E24353B93005FA8A6 /* CFNetwork.framework */; };
-		02642A4124353BA7005FA8A6 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02642A4024353BA6005FA8A6 /* MobileCoreServices.framework */; };
 		02642A4324353BB1005FA8A6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02642A4224353BB1005FA8A6 /* UIKit.framework */; };
 		02642A4524353BCD005FA8A6 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 02642996243510FF005FA8A6 /* libz.tbd */; };
 		02642A4624353BD5005FA8A6 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 02642A4424353BBC005FA8A6 /* libxml2.tbd */; };
@@ -86,6 +86,7 @@
 		0253AAD7241BE7F9004283BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0253AADA241BE7F9004283BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0253AADC241BE7F9004283BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		02585FEE24BFAC3100C1102D /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		02642996243510FF005FA8A6 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		026429F724353B12005FA8A6 /* GCDWebServers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GCDWebServers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		02642A0424353B53005FA8A6 /* GCDWebServerFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerFunctions.h; sourceTree = "<group>"; };
@@ -142,8 +143,8 @@
 				02642A4624353BD5005FA8A6 /* libxml2.tbd in Frameworks */,
 				02642A3F24353B93005FA8A6 /* CFNetwork.framework in Frameworks */,
 				02642A4524353BCD005FA8A6 /* libz.tbd in Frameworks */,
+				02585FEF24BFAC3100C1102D /* CoreServices.framework in Frameworks */,
 				02642A4324353BB1005FA8A6 /* UIKit.framework in Frameworks */,
-				02642A4124353BA7005FA8A6 /* MobileCoreServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,6 +185,7 @@
 		02642995243510FE005FA8A6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				02585FEE24BFAC3100C1102D /* CoreServices.framework */,
 				02642A4424353BBC005FA8A6 /* libxml2.tbd */,
 				02642A4224353BB1005FA8A6 /* UIKit.framework */,
 				02642A4024353BA6005FA8A6 /* MobileCoreServices.framework */,
