@@ -4,7 +4,7 @@ import template from './template.hbs'
 import API from 'lib/rozhlas.js'
 
 const LivePage = ATV.Page.create({
-  name: 'stations',
+  name: 'live',
   template: template,
   ready (options, resolve, reject) {
     let getStations = ATV.Ajax.get(API.url.stations, {})
