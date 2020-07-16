@@ -20,7 +20,7 @@ function buildResults(doc, searchText) {
     var episodes = []
     var serials = []
 
-    let getSearch = ATV.Ajax.get(API.url.search + '?filter[fulltext]=' + encodeURIComponent(searchText) + '&onlyPlayable=true')
+    let getSearch = API.get(API.url.search + '?filter[fulltext]=' + encodeURIComponent(searchText) + '&onlyPlayable=true')
 
     // Then resolve them at once
     Promise
@@ -45,7 +45,7 @@ function buildResults(doc, searchText) {
 
         for (var id in serial_ids) {
           promises.push(
-            ATV.Ajax.get(API.url.serial(id))
+            API.get(API.url.serial(id))
               .then((xhr) => {
                 serials.push(xhr.response.data)
               })

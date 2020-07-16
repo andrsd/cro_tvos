@@ -25,7 +25,7 @@ const TopicPage = ATV.Page.create({
     }
   },
   commonTopic (options, resolve, reject) {
-    let getTopic = ATV.Ajax.get(API.url.topic(options.id), {})
+    let getTopic = API.get(API.url.topic(options.id))
 
     Promise
       .all([getTopic])
@@ -69,7 +69,7 @@ const TopicPage = ATV.Page.create({
       })
   },
   playsReadingsStories(options, resolve, reject) {
-    let getTopic = ATV.Ajax.get(API.url.topic(options.id), {})
+    let getTopic = API.get(API.url.topic(options.id))
 
     Promise
       .all([getTopic])

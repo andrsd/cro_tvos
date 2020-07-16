@@ -15,8 +15,8 @@ const PlayPage = ATV.Page.create({
     var mm = String(today.getUTCMonth() + 1).padStart(2, '0')
     var dd = String(today.getUTCDate()).padStart(2, '0')
 
-    let getStationInfo = ATV.Ajax.get(API.url.stationInfo(options.id), {})
-    let getCurrentSchedule = ATV.Ajax.get(API.url.scheduleCurrent, {})
+    let getStationInfo = API.get(API.url.stationInfo(options.id))
+    let getCurrentSchedule = API.get(API.url.scheduleCurrent)
 
     Promise
       .all([getStationInfo, getCurrentSchedule])

@@ -20,15 +20,15 @@ const ShowPage = ATV.Page.create({
     let getShowSerials
     if (options && 'next' in options) {
       var result = options.next.match("shows\/(.+)\/episodes")
-      getShow = ATV.Ajax.get(API.url.show(result[1]))
-      getShowEpisodes = ATV.Ajax.get(options.next)
-      getShowSerials = ATV.Ajax.get(API.url.showSerials(result[1]))
+      getShow = API.get(API.url.show(result[1]))
+      getShowEpisodes = API.get(options.next)
+      getShowSerials = API.get(API.url.showSerials(result[1]))
     }
     else {
       var show_id = options.id
-      getShow = ATV.Ajax.get(API.url.show(show_id))
-      getShowEpisodes = ATV.Ajax.get(API.url.showEpisodes(show_id) + `?page[limit]=10&sort=-since`)
-      getShowSerials = ATV.Ajax.get(API.url.showSerials(show_id))
+      getShow = API.get(API.url.show(show_id))
+      getShowEpisodes = API.get(API.url.showEpisodes(show_id) + `?page[limit]=10&sort=-since`)
+      getShowSerials = API.get(API.url.showSerials(show_id))
     }
 
     Promise

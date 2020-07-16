@@ -7,14 +7,12 @@ const HomePage = ATV.Page.create({
   name: 'home',
   template: template,
   ready (options, resolve, reject) {
-    let getHomePage = ATV.Ajax.get(API.url.homepage)
-
     var carousel
     var dashboard = []
     var selected = []
     var recommended = []
 
-    ATV.Ajax
+    API
       .get(API.url.homepage)
       .then((xhr) => {
         var promises = []
@@ -37,7 +35,7 @@ const HomePage = ATV.Page.create({
               if (jtem.dashboardType == 'dashboard_topic') {
                 var url = API.url.entityUrl(jtem.attributes.entity)
                 promises.push(
-                  ATV.Ajax
+                  API
                     .get(url)
                     .then((xhr) => {
                       dashboard.push(xhr.response.data)
@@ -57,7 +55,7 @@ const HomePage = ATV.Page.create({
 
               if (url != null) {
                 promises.push(
-                  ATV.Ajax
+                  API
                     .get(url)
                     .then((xhr) => {
                       recommended.push(xhr.response.data)

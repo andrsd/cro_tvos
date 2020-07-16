@@ -7,8 +7,8 @@ const LivePage = ATV.Page.create({
   name: 'live',
   template: template,
   ready (options, resolve, reject) {
-    let getStations = ATV.Ajax.get(API.url.stations, {})
-    let getCurrentSchedule = ATV.Ajax.get(API.url.scheduleCurrent, {})
+    let getStations = API.get(API.url.stations)
+    let getCurrentSchedule = API.get(API.url.scheduleCurrent)
 
     Promise
       .all([getStations, getCurrentSchedule])

@@ -17,8 +17,8 @@ const SerialPage = ATV.Page.create({
     holdselect: 'onHoldSelect'
   },
   ready (options, resolve, reject) {
-    let getSerialInfo = ATV.Ajax.get(API.url.serial(options.id))
-    let getSerialEpisodes = ATV.Ajax.get(API.url.serialEpisodes(options.id))
+    let getSerialInfo = API.get(API.url.serial(options.id))
+    let getSerialEpisodes = API.get(API.url.serialEpisodes(options.id))
 
     Promise
       .all([getSerialInfo, getSerialEpisodes])

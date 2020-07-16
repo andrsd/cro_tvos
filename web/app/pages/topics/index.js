@@ -7,7 +7,7 @@ const TopicsPage = ATV.Page.create({
   name: 'topics',
   template: template,
   ready (options, resolve, reject) {
-    let getTopics = ATV.Ajax.get(API.url.topics, {})
+    let getTopics = API.get(API.url.topics)
 
     Promise
       .all([getTopics])

@@ -15,7 +15,7 @@ const FavoritesPage = ATV.Page.create({
       // Issue a request for each show and then parse into JSON
       favorites.forEach((value) => {
         promises.push(
-          ATV.Ajax
+          API
             .get(API.url.entityUrl(value))
             .then((xhr) => {
               value.attributes = xhr.response.data.attributes
