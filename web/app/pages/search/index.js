@@ -20,13 +20,11 @@ function buildResults(doc, searchText) {
     var episodes = []
     var serials = []
 
-    let getSearch = API.get(API.url.search + '?filter[fulltext]=' + encodeURIComponent(searchText) + '&onlyPlayable=true')
-
     // Then resolve them at once
-    Promise
-      .all([getSearch])
+    API
+      .get(API.url.search + '?filter[fulltext]=' + encodeURIComponent(searchText) + '&onlyPlayable=true')
       .then((xhrs) => {
-        let results = xhrs[0].response
+        let results = xhrs.response
         var serial_ids = {}
 
         for (var r of results.data) {
