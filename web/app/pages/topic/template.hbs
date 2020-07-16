@@ -20,9 +20,9 @@
         {{#each carousel }}
         <listItemLockup data-href-page="{{ entity.type }}" data-href-page-options="{{toJSON entity }}">
           {{#if image}}
-          <img src="{{ image }}" width="90" height="90" contentsMode="aspectFill"/>
+          <img src="{{ image }}" class="show-icon" contentsMode="aspectFill"/>
           {{else}}
-          <img src="" width="90" height="90" contentsMode="aspectFill"/>
+          <img src="" class="show-icon" contentsMode="aspectFill"/>
           {{/if}}
           <title>{{ title }}</title>
           <subtitle>Pořad</subtitle>

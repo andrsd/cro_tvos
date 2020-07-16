@@ -41,6 +41,59 @@
     height: 168;
 }
 
+.show-icon {
+    width: 90;
+    height: 90;
+}
+.show {
+    width: 305;
+    height: 220;
+}
+
+.topic-big {
+    width: 370;
+    height: 370;
+}
+.topic {
+    width: 300;
+    height: 300;
+}
+.topic-small {
+    width: 220;
+    height: 220;
+}
+
+.episode-big {
+  width: 592;
+  height: 332;
+}
+.episode {
+  width: 392;
+  height: 220;
+}
+.episode-small {
+  width: 314;
+  height: 176;
+}
+
+.serial {
+  width: 392;
+  height: 220;
+}
+
+.station {
+  width: 540;
+  height: 300;
+}
+.station-regional {
+  width: 395;
+  height: 212;
+}
+.station-int {
+  width: 305;
+  height: 170;
+}
+
 .darkBackgroundColor {
     background-color: rgba(7, 20, 35, 0.8);
 }

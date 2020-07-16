@@ -14,9 +14,9 @@
           {{#each favorites.serials}}
           <lockup data-href-page="{{ type }}" data-href-page-options="{{toJSON this }}">
             {{#if attributes.asset.url}}
-            <img src="{{ attributes.asset.url }}" width="392" height="220"/>
+            <img src="{{ attributes.asset.url }}" class="serial"/>
             {{else}}
-            <img src="" width="392" height="220"/>
+            <img src="" class="serial"/>
             {{/if}}
             <title>{{ attributes.title }}</title>
           </lockup>
@@ -33,9 +33,9 @@
           {{#each favorites.shows}}
           <lockup data-href-page="{{ type }}" data-href-page-options="{{toJSON this }}">
             {{#if attributes.asset.url}}
-            <img src="{{ attributes.asset.url }}" width="250" height="235"/>
+            <img src="{{ attributes.asset.url }}" class="show"/>
             {{else}}
-            <img src="" width="250" height="235"/>
+            <img src="" class="show"/>
             {{/if}}
             <title>{{ attributes.title }}</title>
           </lockup>
@@ -52,9 +52,9 @@
           {{#each favorites.topics}}
           <lockup data-href-page="{{ type }}" data-href-page-options="{{toJSON this }}">
             {{#if attributes.asset.url}}
-            <img src="{{ attributes.asset.url }}" width="210" height="210"/>
+            <img src="{{ attributes.asset.url }}" class="topic-small"/>
             {{else}}
-            <img src="" width="210" height="210"/>
+            <img src="" class="topic-small">
             {{/if}}
             <overlay>
               <title>{{ attributes.title }}</title>

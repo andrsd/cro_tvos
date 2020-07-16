@@ -90,13 +90,6 @@ const HomePage = ATV.Page.create({
         })
       })
   },
-  afterReady(doc) {
-    doc
-      .getElementById('btn-topics')
-      .addEventListener('select', () => {
-        ATV.Navigation.navigate("topics")
-      })
-  }
 })
 
 export default HomePage

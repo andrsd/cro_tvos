@@ -9,9 +9,9 @@
           {{#each topics }}
           <lockup data-href-page="topic" data-href-page-options="{{toJSON this }}">
             {{#if attributes.asset.url}}
-            <img src="{{ attributes.asset.url }}" width="300" height="300" />
+            <img src="{{ attributes.asset.url }}" class="topic" />
             {{else}}
-            <img src="" width="300" height="300" />
+            <img src="" class="topic" />
             {{/if}}
             <overlay>
               <title>{{ attributes.title }}</title>

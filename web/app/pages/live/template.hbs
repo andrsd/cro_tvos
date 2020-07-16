@@ -1,25 +1,25 @@
 <document>
   <stackTemplate>
     <collectionList>
-      <carousel>
+      <grid>
         <section>
         {{#each allover }}
           <lockup data-href-page="play" data-href-page-options="{{toJSON this }}">
             {{#if image}}
-            <img src="{{ image }}" class="darkImage" style="width:768; height:432;" />
+            <img src="{{ image }}" class="darkImage station" />
             {{else}}
-            <img src="" class="darkImage" style="width:768; height:432;" />
+            <img src="" class="darkImage station" />
             {{/if}}
             <title>{{ stationName }}</title>
             <description class="current-show" style="font-size:27%; margin-top:10; text-align: center">{{ showTitle }}</description>
             <overlay>
-              <progressBar value="{{ progress }}" style="tv-tint-color2x: black"/>
+              <progressBar value="{{ progress }}" style="tv-tint-color2x: black; margin: 0"/>
             </overlay>
           </lockup>
         {{/each}}
         </section>
-      </carousel>
-      <shelf>
+      </grid>
+      <grid>
           <header>
             <title>Regionální stanice</title>
           </header>
@@ -27,19 +27,19 @@
             {{#each regional }}
             <lockup data-href-page="play" data-href-page-options="{{toJSON this }}">
               {{#if image}}
-              <img class="tile" src="{{ image }}"/>
+              <img class="station-regional" src="{{ image }}"/>
               {{else}}
-              <img class="tile" src=""/>
+              <img class="station-regional" src=""/>
               {{/if}}
               <title>{{ stationName }}</title>
               <description class="current-show" style="font-size:27%; margin-top:10; text-align: center">{{ showTitle }}</description>
               <overlay>
-                <progressBar value="{{ progress }}" style="tv-tint-color2x: black"/>
+                <progressBar value="{{ progress }}" style="tv-tint-color2x: black; margin: 0"/>
               </overlay>
             </lockup>
             {{/each}}
           </section>
-      </shelf>
+      </grid>
       <shelf>
           <header>
             <title>Zahraniční stanice</title>
@@ -48,14 +48,14 @@
             {{#each foreign }}
             <lockup data-href-page="play" data-href-page-options="{{toJSON this }}">
               {{#if image}}
-              <img class="tile" src="{{ image }}"/>
+              <img class="station-int" src="{{ image }}"/>
               {{else}}
-              <img class="tile" src=""/>
+              <img class="station-int" src=""/>
               {{/if}}
               <title>{{ stationName }}</title>
               <description class="current-show" style="font-size:27%; margin-top:10; text-align: center">{{ showTitle }}</description>
               <overlay>
-                <progressBar value="{{ progress }}" style="tv-tint-color2x: black"/>
+                <progressBar value="{{ progress }}" style="tv-tint-color2x: black; margin: 0"/>
               </overlay>
             </lockup>
             {{/each}}

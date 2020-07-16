@@ -7,9 +7,9 @@
           {{#each carousel.items }}
           <lockup data-href-page="{{ entity.type }}" data-href-page-options="{{toJSON entity }}">
             {{#if image}}
-            <img src="{{ image }}" class="darkImage" style="width:570; height:320;" />
+            <img src="{{ image }}" class="darkImage episode-big" />
             {{else}}
-            <img src="" class="darkImage" style="width:570; height:320;" />
+            <img src="" class="darkImage episode-big" />
             {{/if}}
             <title>{{ title }}</title>
             <description class="current-show" style="font-size:27%; margin-top:10; text-align: center">{{ description }}</description>
@@ -18,31 +18,8 @@
         </section>
       </carousel>
       {{/if}}
-      {{#if dashboard}}
-      <separator>
-        <button id="btn-topics">
-          <text>Témata</text>
-        </button>
-      </separator>
-      <grid>
-          <section>
-            {{#each dashboard }}
-            <lockup data-href-page="topic" data-href-page-options="{{toJSON this }}">
-              {{#if attributes.asset.url}}
-              <img src="{{ attributes.asset.url }}" style="width: 370; height: 370"/>
-              {{else}}
-              <img src="" style="width: 370; height: 370"/>
-              {{/if}}
-              <overlay>
-                <title>{{ attributes.title }}</title>
-              </overlay>
-            </lockup>
-            {{/each}}
-          </section>
-      </grid>
-      {{/if}}
       {{#if selected}}
-      <shelf>
+      <grid>
           <header>
             <title>Vybíráme hry, četby a povídky</title>
           </header>
@@ -58,10 +35,10 @@
             </lockup>
             {{/each}}
           </section>
-      </shelf>
+      </grid>
       {{/if}}
       {{#if recommended}}
-      <shelf>
+      <grid>
           <header>
             <title>Doporučené</title>
           </header>
@@ -69,13 +46,40 @@
             {{#each recommended }}
             <lockup data-href-page="{{ type }}" data-href-page-options="{{toJSON this }}">
               {{#if attributes.asset.url}}
-              <img class="square" src="{{ attributes.asset.url }}"/>
+              <img class="show" src="{{ attributes.asset.url }}"/>
               {{else}}
-              <img class="square" src=""/>
+              <img class="show" src=""/>
               {{/if}}
               <title>{{ attributes.title }}</title>
             </lockup>
             {{/each}}
+          </section>
+      </grid>
+      {{/if}}
+      {{#if dashboard}}
+      <shelf style="margin-top: 30">
+        <header>
+          <title>Témata</title>
+        </header>
+          <section>
+            {{#each dashboard }}
+            <lockup data-href-page="topic" data-href-page-options="{{toJSON this }}">
+              {{#if attributes.asset.url}}
+              <img src="{{ attributes.asset.url }}" class="topic-small"/>
+              {{else}}
+              <img src="" class="topic-small"/>
+              {{/if}}
+              <overlay>
+                <title>{{ attributes.title }}</title>
+              </overlay>
+            </lockup>
+            {{/each}}
+            <lockup data-href-page="topics">
+              <img src="" class="topic-small"/>
+              <overlay>
+                <title>Další...</title>
+              </overlay>
+            </lockup>
           </section>
       </shelf>
       {{/if}}
