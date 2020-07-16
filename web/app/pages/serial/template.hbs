@@ -6,6 +6,7 @@
           <heroImg src="{{ serial.attributes.asset.url }}" />
           <description id="serial-description" style="tv-text-max-lines: 2">{{removeHTML serial.attributes.description }}</description>
           <row>
+            <buttonLockup id="play-serial-btn"><badge src="resource://button-play" /><title>Přehrát</title></buttonLockup>
             <buttonLockup id="fav-btn">{{{ ratedButton }}}</buttonLockup>
           </row>
         </itemBanner>

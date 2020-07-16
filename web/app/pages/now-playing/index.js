@@ -106,7 +106,11 @@ const NowPlayingPage = ATV.Page.create({
         }
       })
     }
+  },
+  play() {
+    player.play()
   }
 })
+
 
 export default NowPlayingPage
