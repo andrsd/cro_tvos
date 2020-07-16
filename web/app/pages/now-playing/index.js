@@ -82,16 +82,10 @@ const NowPlayingPage = ATV.Page.create({
     var mediaItem = this.buildMediaItem(episode)
     if (mediaItem) {
       player.playlist.push(mediaItem)
-      ATV.Navigation.back()
+      return true
     }
     else {
-      ATV.Navigation.showError({
-        data: {
-          title: 'Chyba',
-          message: 'Nelze přidat do fronty. Epizoda již není dostupná.'
-        },
-        type: 'document'
-      })
+      return false
     }
   },
   init() {
