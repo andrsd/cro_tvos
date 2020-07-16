@@ -3,7 +3,9 @@
     <list>
       <relatedContent>
         <itemBanner>
+          {{#if serial.attributes.asset.url}}
           <heroImg src="{{ serial.attributes.asset.url }}" />
+          {{/if}}
           <description id="serial-description" style="tv-text-max-lines: 2">{{removeHTML serial.attributes.description }}</description>
           <row>
             <buttonLockup id="play-serial-btn"><badge src="resource://button-play" /><title>Přehrát</title></buttonLockup>

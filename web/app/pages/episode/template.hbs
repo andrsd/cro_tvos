@@ -20,7 +20,9 @@
           </buttonLockup>
         </row>
       </stack>
+      {{#if episode.attributes.asset.url}}
       <heroImg src="{{ episode.attributes.asset.url }}" style="width: 700;"/>
+      {{/if}}
     </banner>
     {{#if related}}
     <shelf style="padding: 10 0 -85 50">

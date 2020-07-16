@@ -5,7 +5,11 @@
         <section>
         {{#each allover }}
           <lockup data-href-page="play" data-href-page-options="{{toJSON this }}">
-            <img src="{{ fullImageURL image }}" class="darkImage" style="width:768; height:432;" />
+            {{#if image}}
+            <img src="{{ image }}" class="darkImage" style="width:768; height:432;" />
+            {{else}}
+            <img src="" class="darkImage" style="width:768; height:432;" />
+            {{/if}}
             <title>{{ stationName }}</title>
             <description class="current-show" style="font-size:27%; margin-top:10; text-align: center">{{ showTitle }}</description>
             <overlay>
@@ -22,7 +26,11 @@
           <section>
             {{#each regional }}
             <lockup data-href-page="play" data-href-page-options="{{toJSON this }}">
+              {{#if image}}
               <img class="tile" src="{{ image }}"/>
+              {{else}}
+              <img class="tile" src=""/>
+              {{/if}}
               <title>{{ stationName }}</title>
               <description class="current-show" style="font-size:27%; margin-top:10; text-align: center">{{ showTitle }}</description>
               <overlay>
@@ -39,7 +47,11 @@
           <section>
             {{#each foreign }}
             <lockup data-href-page="play" data-href-page-options="{{toJSON this }}">
+              {{#if image}}
               <img class="tile" src="{{ image }}"/>
+              {{else}}
+              <img class="tile" src=""/>
+              {{/if}}
               <title>{{ stationName }}</title>
               <description class="current-show" style="font-size:27%; margin-top:10; text-align: center">{{ showTitle }}</description>
               <overlay>

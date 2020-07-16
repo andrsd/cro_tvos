@@ -3,7 +3,9 @@
     <list>
       <relatedContent>
         <itemBanner>
+          {{#if topic.attributes.asset.url}}
           <heroImg src="{{ topic.attributes.asset.url }}" />
+          {{/if}}
           <description id="show-description" style="tv-text-max-lines: 2"></description>
           <row>
             <buttonLockup id="fav-btn">{{{ ratedButton }}}</buttonLockup>
@@ -17,7 +19,11 @@
       <section>
         {{#each carousel }}
         <listItemLockup data-href-page="{{ entity.type }}" data-href-page-options="{{toJSON entity }}">
+          {{#if image}}
           <img src="{{ image }}" width="90" height="90" contentsMode="aspectFill"/>
+          {{else}}
+          <img src="" width="90" height="90" contentsMode="aspectFill"/>
+          {{/if}}
           <title>{{ title }}</title>
           <subtitle>Pořad</subtitle>
           <placeholder>{{removeHTML description }}</placeholder>

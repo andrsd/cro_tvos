@@ -12,7 +12,11 @@
         <section>
           {{#each items }}
           <lockup data-href-page="{{ entity.type }}" data-href-page-options="{{toJSON entity }}">
-            <img src="{{ fullImageURL image }}" class="tile_wide"/>
+            {{#if image}}
+            <img src="{{ image }}" class="tile_wide"/>
+            {{else}}
+            <img src="" class="tile_wide"/>
+            {{/if}}
             <title>{{ title }}</title>
           </lockup>
           {{/each}}
