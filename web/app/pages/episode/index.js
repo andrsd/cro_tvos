@@ -60,13 +60,11 @@ const EpisodePage = ATV.Page.create({
     }
   },
   afterReady (doc) {
-    const addToQueue = () => {
-      NowPlayingPage.addEpisodeToPlaylist(this.episode)
-    }
-
     doc
       .getElementById('add-btn')
-      .addEventListener('select', addToQueue)
+      .addEventListener('select', () => {
+        NowPlayingPage.addEpisodeToPlaylist(this.episode)
+      })
   },
   episode: null
 })

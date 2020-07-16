@@ -93,13 +93,11 @@ const HomePage = ATV.Page.create({
       })
   },
   afterReady(doc) {
-    const navigateToTopics = () => {
-      ATV.Navigation.navigate("topics")
-    }
-
     doc
       .getElementById('btn-topics')
-      .addEventListener('select', navigateToTopics)
+      .addEventListener('select', () => {
+        ATV.Navigation.navigate("topics")
+      })
   }
 })
 

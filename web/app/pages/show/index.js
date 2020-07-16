@@ -1,9 +1,11 @@
 import ATV from 'atvjs'
 import template from './template.hbs'
+import context_menu from './context-menu.hbs'
 
 import API from 'lib/rozhlas.js'
 import favorites from 'lib/favorites.js'
 import History from 'lib/history.js'
+import NowPlayingPage from 'pages/now-playing'
 
 const ShowPage = ATV.Page.create({
   name: 'show',
@@ -69,23 +71,56 @@ const ShowPage = ATV.Page.create({
     if (elementType === 'listItemLockup') {
       var episode = JSON.parse(element.getAttribute('data-href-page-options'))
       if (episode.type == 'episode') {
-        ATV.Navigation.navigate('episode-context-menu', {
-          episode: episode
+        var doc = ATV.Navigation.presentModal({
+          template: context_menu,
+          data: {
+            episode: episode
+          }
         })
+
+        doc
+          .getElementById('add-btn')
+          .addEventListener('select', () => {
+            if (NowPlayingPage.addEpisodeToPlaylist(episode)) {
+              ATV.Navigation.dismissModal()
+            }
+            else {
+              ATV.Navigation.dismissModal()
+              ATV.Navigation.showError({
+                data: {
+                  title: 'Chyba',
+                  message: 'Nelze přidat do fronty. Epizoda již není dostupná.'
+                },
+                type: 'document'
+              })
+            }
+          })
+
+        doc
+          .getElementById('watched-btn')
+          .addEventListener('select', () => {
+            History.set(episode.id, 1.0)
+            ATV.Navigation.dismissModal()
+          })
+
+        doc
+          .getElementById('unwatched-btn')
+          .addEventListener('select', () => {
+            History.remove(episode.id, 0.0)
+            ATV.Navigation.dismissModal()
+          })
       }
     }
   },
   afterReady (doc) {
-    const changeFavorites = () => {
-      if (this.show) {
-        var is_favorite = favorites.change(this.show.attributes.title, 'show', this.show.id)
-        doc.getElementById('fav-btn').innerHTML = favorites.getRatedButton(is_favorite)
-      }
-    }
-
     doc
       .getElementById('fav-btn')
-      .addEventListener('select', changeFavorites)
+      .addEventListener('select', () => {
+        if (this.show) {
+          var is_favorite = favorites.change(this.show.attributes.title, 'show', this.show.id)
+          doc.getElementById('fav-btn').innerHTML = favorites.getRatedButton(is_favorite)
+        }
+      })
   },
   show: null
 })
