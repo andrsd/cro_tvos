@@ -76,16 +76,14 @@ const ShowPage = ATV.Page.create({
     }
   },
   afterReady (doc) {
-    const changeFavorites = () => {
-      if (this.show) {
-        var is_favorite = favorites.change(this.show.attributes.title, 'show', this.show.id)
-        doc.getElementById('fav-btn').innerHTML = favorites.getRatedButton(is_favorite)
-      }
-    }
-
     doc
       .getElementById('fav-btn')
-      .addEventListener('select', changeFavorites)
+      .addEventListener('select', () => {
+        if (this.show) {
+          var is_favorite = favorites.change(this.show.attributes.title, 'show', this.show.id)
+          doc.getElementById('fav-btn').innerHTML = favorites.getRatedButton(is_favorite)
+        }
+      })
   },
   show: null
 })

@@ -104,17 +104,15 @@ const TopicPage = ATV.Page.create({
     }
   },
   afterReady (doc) {
-    const changeFavorites = () => {
-      if (this.topic) {
-        var is_favorite = favorites.change(this.topic.attributes.title, 'topic', this.topic.id)
-        doc.getElementById('fav-btn').innerHTML = favorites.getRatedButton(is_favorite)
-      }
-    }
-
     if (doc.getElementById('fav-btn'))
       doc
         .getElementById('fav-btn')
-        .addEventListener('select', changeFavorites)
+        .addEventListener('select', () => {
+          if (this.topic) {
+            var is_favorite = favorites.change(this.topic.attributes.title, 'topic', this.topic.id)
+            doc.getElementById('fav-btn').innerHTML = favorites.getRatedButton(is_favorite)
+          }
+        })
   },
   topic: null,
   episodes: null,

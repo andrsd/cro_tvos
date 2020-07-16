@@ -64,16 +64,14 @@ const SerialPage = ATV.Page.create({
     }
   },
   afterReady (doc) {
-    const changeFavorites = () => {
-      if (this.serial) {
-        var is_favorite = favorites.change(this.serial.attributes.title, "serial", this.serial.id)
-        doc.getElementById('fav-btn').innerHTML = favorites.getRatedButton(is_favorite)
-      }
-    }
-
     doc
       .getElementById('fav-btn')
-      .addEventListener('select', changeFavorites)
+      .addEventListener('select', () => {
+        if (this.serial) {
+          var is_favorite = favorites.change(this.serial.attributes.title, "serial", this.serial.id)
+          doc.getElementById('fav-btn').innerHTML = favorites.getRatedButton(is_favorite)
+        }
+      })
   },
   serial: null,
 })
