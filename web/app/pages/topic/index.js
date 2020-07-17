@@ -14,9 +14,7 @@ const TopicPage = ATV.Page.create({
     highlight: 'onHighlight'
   },
   ready (options, resolve, reject) {
-    if (options.id == '671d0806-2afe-4282-ae90-319b6ef369a2' ||  // hry, cetby a povidky
-        options.id == '8ed08518-9d92-437c-a96f-e5df046aff4e')    // pro deti
-    {
+    if (Object.values(API.ids).includes(options.id)) {
       this.template = storiesTpl
       this.playsReadingsStories(options, resolve, reject)
     }

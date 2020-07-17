@@ -126,6 +126,23 @@ const HomePage = ATV.Page.create({
         })
       })
   },
+  afterReady(doc) {
+    doc
+      .getElementById('read-btn')
+      .addEventListener('select', () => {
+        ATV.Navigation.navigate('topic', { id: API.ids.read })
+      })
+    doc
+      .getElementById('docs-btn')
+      .addEventListener('select', () => {
+        ATV.Navigation.navigate('topic', { id: API.ids.docs })
+      })
+    doc
+      .getElementById('kids-btn')
+      .addEventListener('select', () => {
+        ATV.Navigation.navigate('topic', { id: API.ids.kids })
+      })
+  }
 })
 
 export default HomePage

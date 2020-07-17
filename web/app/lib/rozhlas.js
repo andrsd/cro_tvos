@@ -114,9 +114,19 @@ const url = {
   }
 }
 
+const ids = {
+  // hry, cetby a povidky
+  'read': '671d0806-2afe-4282-ae90-319b6ef369a2',
+  // pro deti
+  'kids': '8ed08518-9d92-437c-a96f-e5df046aff4e',
+  // dokumenty
+  'docs': '05bc9bd7-7a9d-49a6-b1aa-12a7bfb558f7'
+}
+
 export default {
   url,
   get,
   put,
   post,
+  ids
 }
