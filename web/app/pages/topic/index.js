@@ -1,4 +1,5 @@
 import ATV from 'atvjs'
+import stripHtml from 'string-strip-html'
 import template from './template.hbs'
 import storiesTpl from './stories.hbs'
 
@@ -43,8 +44,11 @@ const TopicPage = ATV.Page.create({
         for (var widget of data.attributes.widgets) {
           if (widget.type == 'carousel') {
             for (var i of widget.attributes.items) {
-              if (i.itemType == 'audio')
-                carousel.push(i)
+              if (i.itemType == 'audio') {
+                var show = i
+                show.id = i.entity.id
+                carousel.push(show)
+              }
             }
           }
           else if (widget.type == 'episodes_list') {
@@ -97,10 +101,15 @@ const TopicPage = ATV.Page.create({
     let elementType = element.nodeName
 
     if (elementType === 'listItemLockup') {
-      var ph = element.getElementsByTagName("placeholder").item(0)
-
+      var page = element.getAttribute("data-href-page")
+      var data = JSON.parse(element.getAttribute("data-href-page-options"))
       var doc = getActiveDocument()
-      doc.getElementById('show-description').innerHTML = ph.innerHTML
+      if (page == "episode") {
+        doc.getElementById('description').innerHTML = stripHtml(data.attributes.description)
+      }
+      else if (page == "show") {
+        doc.getElementById('description').innerHTML = stripHtml(data.description)
+      }
     }
   },
   afterReady (doc) {

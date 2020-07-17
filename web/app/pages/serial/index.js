@@ -1,4 +1,5 @@
 import ATV from 'atvjs'
+import stripHtml from 'string-strip-html'
 import template from './template.hbs'
 import errorTpl from 'shared/templates/error.hbs'
 import context_menu from './context-menu.hbs'
@@ -46,10 +47,9 @@ const SerialPage = ATV.Page.create({
     let elementType = element.nodeName
 
     if (elementType === 'listItemLockup') {
-      var ph = element.getElementsByTagName("placeholder").item(0)
-
+      var episode = JSON.parse(element.getAttribute("data-href-page-options"))
       var doc = getActiveDocument()
-      doc.getElementById('serial-description').innerHTML = ph.innerHTML
+      doc.getElementById('serial-description').innerHTML = stripHtml(episode.attributes.description)
     }
   },
   onHoldSelect(e) {
