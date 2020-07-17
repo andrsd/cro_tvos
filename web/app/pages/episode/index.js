@@ -29,6 +29,7 @@ const EpisodePage = ATV.Page.create({
           resolve({
             episode: this.episode,
             related: related,
+            ratedButton: favorites.getRatedButton(favorites.isFavorite(this.episode.id)),
             show_button: this.show_button
           })
         }, (xhr) => {
