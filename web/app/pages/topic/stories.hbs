@@ -8,23 +8,39 @@
     </banner>
     <collectionList>
       {{#each sections }}
+      {{#if title}}
       <grid>
         <header>
           <title>{{ title }}</title>
         </header>
-        <section>
+        <section style="tv-line-spacing: 0">
           {{#each items }}
           <lockup data-href-page="{{ entity.type }}" data-href-page-options="{{toJSON entity }}">
             {{#if image}}
-            <img src="{{ image }}" class="tile_wide"/>
+            <img src="{{ image }}" class="{{ entity.type }}"/>
             {{else}}
-            <img src="" class="tile_wide"/>
+            <img src="" class="{{ entity.type }}"/>
             {{/if}}
-            <title>{{ title }}</title>
+            <overlay>
+              <title class="image-title">{{ title }}</title>
+            </overlay>
           </lockup>
           {{/each}}
         </section>
       </grid>
+      {{else}}
+      {{#each items}}
+      <shelf>
+        <section>
+          <listItemLockup data-href-page="{{ entity.type }}" data-href-page-options="{{toJSON entity }}" style="width: 1800; height: 448; tv-highlight-color:rgb(192,192,192,1.0); text-color: #fff">
+            <img src="{{ image }}" class="episode-large" style="tv-position: left" contentsMode="aspectFill"/>
+            <title style="tv-position: top-right; margin-top: 90; color: #888; font-size: 30%">{{ description }}</title>
+            <title style="tv-position: top-right; margin-top: 10">{{ title }}</title>
+          </listItemLockup>
+        </section>
+      </shelf>
+      {{/each}}
+      {{/if}}
       {{/each}}
     </collectionList>
   </stackTemplate>

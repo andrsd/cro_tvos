@@ -111,11 +111,13 @@ const TopicPage = ATV.Page.create({
       var page = element.getAttribute("data-href-page")
       var data = JSON.parse(element.getAttribute("data-href-page-options"))
       var doc = getActiveDocument()
-      if (page == "episode") {
-        doc.getElementById('description').innerHTML = stripHtml(data.attributes.description)
-      }
-      else if (page == "show") {
-        doc.getElementById('description').innerHTML = stripHtml(data.description)
+      if (doc.getElementById('description')) {
+        if (page == "episode") {
+          doc.getElementById('description').innerHTML = stripHtml(data.attributes.description)
+        }
+        else if (page == "show") {
+          doc.getElementById('description').innerHTML = stripHtml(data.description)
+        }
       }
     }
   },

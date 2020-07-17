@@ -63,6 +63,10 @@
     height: 220;
 }
 
+.episode-large {
+  width: 800;
+  height: 448;
+}
 .episode-big {
   width: 592;
   height: 332;
@@ -92,6 +96,12 @@
 .station-int {
   width: 305;
   height: 170;
+}
+
+.image-title {
+  font-weight: bold;
+  font-size: 30%;
+  text-shadow: 0 0 5 #000;
 }
 
 .darkBackgroundColor {
