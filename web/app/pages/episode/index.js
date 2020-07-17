@@ -16,6 +16,8 @@ const EpisodePage = ATV.Page.create({
         .all([getEpisode, getRelatedEpisodes])
         .then((xhrs) => {
           this.episode = xhrs[0].response.data
+          if (this.episode.relationships.show.data.id)
+            this.show_button = true
 
           var related = []
           for (var r of xhrs[1].response.data) {
@@ -25,7 +27,8 @@ const EpisodePage = ATV.Page.create({
 
           resolve({
             episode: this.episode,
-            related: related
+            related: related,
+            show_button: this.show_button
           })
         }, (xhr) => {
           // error
@@ -37,6 +40,8 @@ const EpisodePage = ATV.Page.create({
         .all([getEpisode])
         .then((xhrs) => {
           this.episode = xhrs[0].response.data
+          if (this.episode.relationships.show.data.id)
+            this.show_button = true
 
           return new API.get(API.url.showEpisodes(this.episode.relationships.show.data.id) + `?page[limit]=10&sort=-since`)
         }, (xhr) => {
@@ -52,7 +57,8 @@ const EpisodePage = ATV.Page.create({
 
           resolve({
             episode: this.episode,
-            related: related
+            related: related,
+            show_button: this.show_button
           })
         }, () => {
           reject()
@@ -65,8 +71,15 @@ const EpisodePage = ATV.Page.create({
       .addEventListener('select', () => {
         NowPlayingPage.addEpisodeToPlaylist(this.episode)
       })
+    if (this.show_button)
+      doc
+        .getElementById('to-show-btn')
+        .addEventListener('select', () => {
+          ATV.Navigation.navigate('show', { id: this.episode.relationships.show.data.id })
+        })
   },
-  episode: null
+  episode: null,
+  show_button: null
 })
 
 export default EpisodePage

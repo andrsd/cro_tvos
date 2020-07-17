@@ -18,6 +18,12 @@
             <badge src="resource://button-add"/>
             <title>Do fronty</title>
           </buttonLockup>
+          {{#if show_button}}
+          <buttonLockup id="to-show-btn">
+            <badge src="resource://list-chevron"/>
+            <title>Pořad</title>
+          </buttonLockup>
+          {{/if}}
         </row>
       </stack>
       {{#if episode.attributes.asset.url}}
