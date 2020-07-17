@@ -29,6 +29,7 @@ const FavoritesPage = ATV.Page.create({
           var shows = []
           var serials = []
           var topics = []
+          var episodes = []
 
           for (var f of favorites) {
             if (f.type == 'show')
@@ -37,14 +38,17 @@ const FavoritesPage = ATV.Page.create({
               serials.push(f)
             else if (f.type == 'topic')
               topics.push(f)
+            else if (f.type == 'episode')
+              episodes.push(f)
           }
 
-          if (shows.length > 0 || serials.length > 0 || topics.length > 0) {
+          if (shows.length > 0 || serials.length > 0 || topics.length > 0 || episodes.length > 0) {
             resolve({
               favorites: {
                 shows: shows,
                 serials: serials,
-                topics: topics
+                topics: topics,
+                episodes: episodes,
               }
             })
           }

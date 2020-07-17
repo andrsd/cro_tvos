@@ -3,6 +3,7 @@ import template from './template.hbs'
 import NowPlayingPage from 'pages/now-playing'
 
 import API from 'lib/rozhlas.js'
+import favorites from 'lib/favorites.js'
 
 const EpisodePage = ATV.Page.create({
   name: 'episode',
@@ -58,6 +59,7 @@ const EpisodePage = ATV.Page.create({
           resolve({
             episode: this.episode,
             related: related,
+            ratedButton: favorites.getRatedButton(favorites.isFavorite(this.episode.id)),
             show_button: this.show_button
           })
         }, () => {
@@ -77,6 +79,14 @@ const EpisodePage = ATV.Page.create({
         .addEventListener('select', () => {
           ATV.Navigation.navigate('show', { id: this.episode.relationships.show.data.id })
         })
+    doc
+      .getElementById('fav-btn')
+      .addEventListener('select', () => {
+        if (this.episode) {
+          var is_favorite = favorites.change(this.episode.attributes.title, "episode", this.episode.id)
+          doc.getElementById('fav-btn').innerHTML = favorites.getRatedButton(is_favorite)
+        }
+      })
   },
   episode: null,
   show_button: null
