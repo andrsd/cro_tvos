@@ -2,6 +2,9 @@
   <stackTemplate>
     <banner>
       <title>{{ attributes.title }}</title>
+      <row>
+        <buttonLockup id="fav-btn">{{{ ratedButton }}}</buttonLockup>
+      </row>
     </banner>
     <collectionList>
       {{#each sections }}

@@ -79,10 +79,17 @@ const TopicPage = ATV.Page.create({
       .all([getTopic])
       .then((xhrs) => {
         var data = xhrs[0].response.data
+
+        this.topic = {
+          id: data.id,
+          attributes: data.attributes
+        }
+
         var obj = {}
 
         obj.attributes = data.attributes
         obj.sections = []
+        obj.ratedButton = favorites.getRatedButton(favorites.isFavorite(this.topic.id))
 
         for (var widget of data.attributes.widgets) {
           if (widget.type == 'carousel') {
