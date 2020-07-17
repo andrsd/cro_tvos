@@ -9,8 +9,7 @@ const HomePage = ATV.Page.create({
   ready (options, resolve, reject) {
     var carousel
     var dashboard = []
-    var selected = []
-    var recommended = []
+    var sections = []
 
     API
       .get(API.url.homepage)
@@ -30,7 +29,8 @@ const HomePage = ATV.Page.create({
             }
           }
           else if (it.id == 9) {
-            for (var jtem of it.attributes.items)
+            let items = it.attributes.items.slice(0, 5)
+            for (var jtem of items)
             {
               if (jtem.dashboardType == 'dashboard_topic') {
                 var url = API.url.entityUrl(jtem.attributes.entity)
@@ -47,10 +47,22 @@ const HomePage = ATV.Page.create({
               }
             }
           }
-          else if (it.id == 83) {
-          }
-          else if (it.id == 3) {
-            for (var entity of it.attributes.entities) {
+          else if (it.type == "content_section" || it.type == "section_category") {
+            let sec = {
+              title: it.attributes.title,
+              items: []
+            }
+            sections.push(sec)
+
+            let entities
+            if (it.id == 140 || it.id == 83)
+              entities = it.attributes.entities.slice(0, 8)
+            else if (it.id == 3)
+              entities = it.attributes.entities.slice(0, 10)
+            else
+              entities = it.attributes.entities
+
+            for (var entity of entities) {
               var url = API.url.entityUrl(entity)
 
               if (url != null) {
@@ -58,7 +70,32 @@ const HomePage = ATV.Page.create({
                   API
                     .get(url)
                     .then((xhr) => {
-                      recommended.push(xhr.response.data)
+                      sec.items.push(xhr.response.data)
+                      return true
+                    }, () => {
+                      return true
+                    })
+                )
+              }
+            }
+          }
+          else if (it.type == "junior") {
+            let sec = {
+              id: it.id,
+              title: it.attributes.title,
+              items: []
+            }
+            sections.push(sec)
+
+            for (var entity of it.attributes.items) {
+              var url = API.url.entityUrl(entity)
+
+              if (url != null) {
+                promises.push(
+                  API
+                    .get(url)
+                    .then((xhr) => {
+                      sec.items.push(xhr.response.data)
                       return true
                     }, () => {
                       return true
@@ -77,8 +114,7 @@ const HomePage = ATV.Page.create({
         resolve({
           carousel: carousel,
           dashboard: dashboard,
-          selected: selected,
-          recommended: recommended
+          sections: sections
         })
       }, () => {
         ATV.Navigation.showError({
