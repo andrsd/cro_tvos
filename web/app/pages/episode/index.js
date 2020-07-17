@@ -1,5 +1,6 @@
 import ATV from 'atvjs'
 import template from './template.hbs'
+import descr_templ from './descr.hbs'
 import NowPlayingPage from 'pages/now-playing'
 
 import API from 'lib/rozhlas.js'
@@ -87,6 +88,24 @@ const EpisodePage = ATV.Page.create({
           var is_favorite = favorites.change(this.episode.attributes.title, "episode", this.episode.id)
           doc.getElementById('fav-btn').innerHTML = favorites.getRatedButton(is_favorite)
         }
+      })
+
+    doc
+      .getElementById('descr')
+      .addEventListener('select', () => {
+        var ctx_doc = ATV.Navigation.presentModal({
+          template: descr_templ,
+          data: {
+            title: this.episode.attributes.title,
+            text: this.episode.attributes.description
+          }
+        })
+
+        ctx_doc
+          .getElementById('dismiss-btn')
+          .addEventListener('select', () => {
+            ATV.Navigation.dismissModal()
+          })
       })
   },
   episode: null,

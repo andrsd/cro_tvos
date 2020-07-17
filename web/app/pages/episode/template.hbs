@@ -8,7 +8,7 @@
           <text>{{timeLength episode.attributes.since episode.attributes.till }}</text>
           <text>{{ episode.attributes.mirroredShow.title }}</text>
         </row>
-        <description allowsZooming="true" moreLabel="more">{{removeHTML episode.attributes.description }}</description>
+        <description id="descr" allowsZooming="true" moreLabel="more">{{removeHTML episode.attributes.description }}</description>
         <row>
           <buttonLockup data-href-page="now-playing" data-href-page-options="{{toJSON episode }}">
             <badge src="resource://button-play"/>
