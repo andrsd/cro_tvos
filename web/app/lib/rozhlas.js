@@ -14,15 +14,15 @@ function request(url, method) {
     xhr.setRequestHeader('Content-Type', 'application/json')
     // listen to the state change
     xhr.onreadystatechange = () => {
-        if (xhr.readyState !== 4) {
-            return
-        }
+      if (xhr.readyState !== 4) {
+        return
+      }
 
-        if (xhr.status >= 200 && xhr.status <= 300) {
-            resolve(xhr)
-        } else {
-            reject(xhr)
-        }
+      if (xhr.status >= 200 && xhr.status <= 300) {
+        resolve(xhr)
+      } else {
+        reject(xhr)
+      }
     }
     // error handling
     xhr.addEventListener('error', () => reject(xhr))
