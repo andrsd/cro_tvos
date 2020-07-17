@@ -48,54 +48,66 @@
 .show {
     width: 305;
     height: 220;
+    tv-tint-color: rgba(1, 1, 1, 0.33);
 }
 
 .topic-big {
     width: 370;
     height: 370;
+    tv-tint-color: rgba(1, 1, 1, 0.33);
 }
 .topic {
     width: 300;
     height: 300;
+    tv-tint-color: rgba(1, 1, 1, 0.33);
 }
 .topic-small {
     width: 220;
     height: 220;
+    tv-tint-color: rgba(1, 1, 1, 0.33);
 }
 
 .episode-large {
   width: 800;
   height: 448;
+  tv-tint-color: rgba(1, 1, 1, 0.33);
 }
 .episode-big {
   width: 592;
   height: 332;
+  tv-tint-color: rgba(1, 1, 1, 0.33);
 }
 .episode {
   width: 392;
   height: 220;
+  tv-tint-color: rgba(1, 1, 1, 0.33);
 }
 .episode-small {
   width: 314;
   height: 176;
+  tv-tint-color: rgba(1, 1, 1, 0.33);
 }
 
 .serial {
   width: 392;
   height: 220;
+  tv-tint-color: rgba(1, 1, 1, 0.33);
 }
 
 .station {
   width: 540;
   height: 300;
+  tv-tint-color: rgba(1, 1, 1, 0.33);
 }
 .station-regional {
   width: 395;
   height: 212;
+  tv-tint-color: rgba(1, 1, 1, 0.33);
 }
 .station-int {
   width: 305;
   height: 170;
+  tv-tint-color: rgba(1, 1, 1, 0.33);
 }
 
 .image-title {

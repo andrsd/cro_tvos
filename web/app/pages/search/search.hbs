@@ -12,7 +12,9 @@
         {{else}}
         <img src="" class="show" />
         {{/if}}
-        <title>{{ attributes.title }}</title>
+        <overlay>
+          <title class="image-title">{{ attributes.title }}</title>
+        <overlay>
       </lockup>
       {{/each}}
     </section>
@@ -31,7 +33,9 @@
         {{else}}
         <img class="episode" />
         {{/if}}
-        <title>{{#if attributes.part}}{{attributes.part}}. {{/if}}{{ attributes.shortTitle }}</title>
+        <overlay>
+          <title class="image-title">{{#if attributes.part}}{{attributes.part}}. {{/if}}{{ attributes.shortTitle }}</title>
+        </overlay>
       </lockup>
       {{/each}}
     </section>
@@ -50,7 +54,9 @@
         {{else}}
         <img src="" class="serial" />
         {{/if}}
-        <title>{{ attributes.title }}{{#if attributes.totalParts}} ({{attributes.totalParts}}){{/if}}</title>
+        <overlay>
+          <title class="image-title">{{ attributes.title }}{{#if attributes.totalParts}} ({{attributes.totalParts}}){{/if}}</title>
+        </overlay>
       </lockup>
       {{/each}}
     </section>
