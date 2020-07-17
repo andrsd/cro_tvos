@@ -23,6 +23,7 @@ const SerialPage = ATV.Page.create({
     Promise
       .all([getSerialInfo, getSerialEpisodes])
       .then((xhrs) => {
+        this.episodes = {}
         this.serial = xhrs[0].response.data
         for (var e of xhrs[1].response.data) {
           e.watched = History.watched(e.id)
