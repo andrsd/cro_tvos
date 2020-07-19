@@ -9,7 +9,8 @@
     "serve": "webpack-dev-server",
     "dist": "NODE_ENV=production webpack --progress",
     "test": "./node_modules/.bin/mocha test --timeout 0 --exit --require @babel/register",
-    "coverage": "npx nyc --reporter=html npm test"
+    "coverage": "npx nyc --reporter=html npm test",
+    "linter": "npx eslint web/app test"
   },
   "repository": {
     "type": "git",
@@ -44,6 +45,7 @@
     "copy-webpack-plugin": "^5.1.1",
     "eslint": "^6.8.0",
     "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-chai-expect": "^2.2.0",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-node": "^9.2.0",
     "eslint-plugin-promise": "^4.2.1",
