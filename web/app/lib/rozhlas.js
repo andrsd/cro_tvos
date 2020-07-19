@@ -1,7 +1,3 @@
-import ATV from 'atvjs'
-
-const _ = ATV._ // lodash
-
 // Doco @ https://rapidoc.croapp.cz/
 const BASE_API_URL = 'https://api.mujrozhlas.cz'
 
