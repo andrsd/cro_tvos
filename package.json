@@ -1,6 +1,6 @@
 {
   "name": "cro-tvos",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "Neoficiální klient Českého rozhlasu pro Apple TV s použitím atvjs",
   "main": "index.js",
   "scripts": {
