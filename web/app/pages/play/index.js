@@ -6,64 +6,59 @@ import ATV from 'atvjs'
 import API from 'lib/rozhlas.js'
 
 const PlayPage = ATV.Page.create({
-  name: 'play',
-  ready (options, resolve, reject) {
-    var schedule
+	name: 'play',
+	ready (options, resolve, reject) {
+		var schedule
 
-    var today = new Date()
-    var yyyy = today.getUTCFullYear()
-    var mm = String(today.getUTCMonth() + 1).padStart(2, '0')
-    var dd = String(today.getUTCDate()).padStart(2, '0')
+		let getStationInfo = API.get(API.url.stationInfo(options.id))
+		let getCurrentSchedule = API.get(API.url.scheduleCurrent)
 
-    let getStationInfo = API.get(API.url.stationInfo(options.id))
-    let getCurrentSchedule = API.get(API.url.scheduleCurrent)
+		Promise
+			.all([getStationInfo, getCurrentSchedule])
+			.then((xhrs) => {
+				// success
+				schedule = xhrs[1].response
 
-    Promise
-      .all([getStationInfo, getCurrentSchedule])
-      .then((xhrs) => {
-        // success
-        schedule = xhrs[1].response
+				var now = new Date()
+				var current_entry = null
+				for (var entry of schedule.data) {
+					var since = Date.parse(entry.attributes.since)
+					var till = Date.parse(entry.attributes.till)
+					if (since <= now && now < till && entry.relationships.station.data.id == options.id)
+						current_entry = entry
+				}
 
-        var now = new Date()
-        var current_entry = null
-        for (var entry of schedule.data) {
-          var since = Date.parse(entry.attributes.since)
-          var till = Date.parse(entry.attributes.till)
-          if (since <= now && now < till && entry.relationships.station.data.id == options.id)
-            current_entry = entry
-        }
+				let live_station = xhrs[0].response
+				var bitrate = 0
+				let playlist
+				for (var pl of live_station.data.attributes.audioLinks) {
+					if (pl.variant == 'mp3' && pl.linkType == "directstream" && pl.bitrate > bitrate) {
+						bitrate = pl.bitrate
+						playlist = pl.url
+					}
+				}
 
-        let live_station = xhrs[0].response
-        var bitrate = 0
-        let playlist
-        for (var pl of live_station.data.attributes.audioLinks) {
-          if (pl.variant == 'mp3' && pl.linkType == "directstream" && pl.bitrate > bitrate) {
-            bitrate = pl.bitrate
-            playlist = pl.url
-          }
-        }
+				const player = new Player()
+				const tvosPlaylist = new Playlist()
+				const mediaItem = new MediaItem('audio', playlist)
+				if (current_entry != null) {
+					mediaItem.title = current_entry.attributes.mirroredShow.title
+					mediaItem.artworkImageURL = current_entry.attributes.asset.url
+				}
+				else {
+					mediaItem.title = live_station.data.attributes.title
+					mediaItem.artworkImageURL = live_station.data.attributes.asset.url
+				}
+				tvosPlaylist.push(mediaItem)
+				player.playlist = tvosPlaylist
+				player.play()
 
-        const player = new Player()
-        const tvosPlaylist = new Playlist()
-        const mediaItem = new MediaItem('audio', playlist)
-        if (current_entry != null) {
-          mediaItem.title = current_entry.attributes.mirroredShow.title
-          mediaItem.artworkImageURL = current_entry.attributes.asset.url
-        }
-        else {
-          mediaItem.title = live_station.data.attributes.title
-          mediaItem.artworkImageURL = live_station.data.attributes.asset.url
-        }
-        tvosPlaylist.push(mediaItem)
-        player.playlist = tvosPlaylist
-        player.play()
-
-        resolve(false)
-      }, (xhr) => {
-        // fail
-        reject(xhr)
-      })
-  }
+				resolve(false)
+			}, (xhr) => {
+				// fail
+				reject(xhr)
+			})
+	}
 })
 
 export default PlayPage
