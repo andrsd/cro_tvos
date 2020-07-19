@@ -6,9 +6,14 @@ insert_final_newline = true
 trim_trailing_whitespace = true
 indent_size = 4
 
-[*.{js,hb,css}]
+[*.{js,css}]
 charset = utf-8
 indent_style = tab
+
+[*.hbs]
+charset = utf-8
+indent_style = space
+indent_size = 2
 
 [{package.json,.travis.yml,.nycrc,codecov.yml,webpack.config.js,.eslintrc.json}]
 indent_style = space
