@@ -1,7 +1,7 @@
 {
   "name": "cro-tvos",
   "version": "1.2.0",
-  "description": "Neoficiální klient Českého rozhlasu pro Apple TV s použitím atvjs",
+  "description": "Neoficiální klient Českého rozhlasu pro Apple TV",
   "main": "index.js",
   "scripts": {
     "install-deps": "npx yarn@$npm_package_engines_yarn install --frozen-lockfile --check-files",
@@ -22,11 +22,11 @@
     "app",
     "tvjs",
     "atvjs",
-    "appletv",
     "tvmlkit",
     "cesky rozhlas",
     "cro",
-    "radio"
+    "radio",
+    "mujrozhlas.cz"
   ],
   "author": "David Andrš",
   "license": "",
